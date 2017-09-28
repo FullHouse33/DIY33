@@ -1,0 +1,28 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# 创建的文件:10.02.2014 15:21:48
+
+newmtl Material__2
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.8627 0.7451 0.3686
+	Kd 0.8627 0.7451 0.3686
+	Ks 0.0863 0.0745 0.0369
+	Ke 0.0863 0.0745 0.0369
+	map_Ka maps\draAspelund_chest.jpg
+	map_Kd maps\draAspelund_chest.jpg
+
+newmtl 02___Default
+	Ns 3.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.8353 0.8353 0.8353
+	Kd 0.8353 0.8353 0.8353
+	Ks 0.6127 0.6127 0.6127
+	Ke 0.0000 0.0000 0.0000

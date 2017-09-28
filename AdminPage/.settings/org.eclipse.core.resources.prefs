@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/views/Company/companyList.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/Company/companyRead.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/Company/libraryRead.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/User/userList.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/User/userRead.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/User/userUpdate.jsp=UTF-8

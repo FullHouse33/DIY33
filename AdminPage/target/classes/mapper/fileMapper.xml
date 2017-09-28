@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sesoc.test.dao.FileMapper">
+	<!-- ?? -->
+	<select id="find"  resultType="CompanyVO">
+		SELECT * FROM ITR_COMPANY	
+	</select>
+	
+	<!-- 파일 저장 -->
+	<insert parameterType="FurnitureVO" id="fileSaved">
+			INSERT INTO ITR_FURNITURE VALUES ( FURNITURENUM_SEQ.NEXTVAL, 
+				#{coNAME}, #{furnitureName}, #{type}, #{color}, 
+				#{objPath}, 
+				#{mtlPath},
+				#{imgPath}
+				<if test="objTexture1 ==null and objTexture2 ==null and objTexture3 ==null and objTexture4 == null">
+				,null, null, null, null
+				</if>
+				<if test="objTexture1 !=null and objTexture2 ==null and objTexture3 ==null and objTexture4 == null">
+				,#{objTexture1}, null, null, null
+				</if>
+				<if test="objTexture1 !=null and objTexture2 !=null and objTexture3 ==null and objTexture4 == null">
+				,#{objTexture1}, #{objTexture2}, null, null
+				</if>
+				<if test="objTexture1 !=null and objTexture2 !=null and objTexture3 !=null and objTexture4 == null">
+				,#{objTexture1}, #{objTexture2}, #{objTexture3}, null
+				</if>
+				<if test="objTexture1 !=null and objTexture2 !=null and objTexture3 !=null and objTexture4 != null">
+				,#{objTexture1}, #{objTexture2}, #{objTexture3}, #{objTexture4}
+				</if>
+			) 
+	</insert>
+	
+	<!-- 가구 라이브러리 목록 -->
+	<select id="libraryList" parameterType="map" resultType="FurnitureVO">
+		SELECT * FROM ITR_FURNITURE 
+		
+			<if test="CompanyName != ''">
+			WHERE CONAME =#{CompanyName}
+				<if test="libraryCondition == 'furnitureName'">
+					and	furnitureName LIKE '%'||#{libraryKeyword}||'%' 
+				</if>
+			
+				<if test="libraryCondition == 'type'">
+					and	TYPE LIKE '%'||#{libraryKeyword}||'%'
+				</if>
+			</if>
+			
+			<if test="CompanyName == ''">
+				<if test="libraryCondition == 'coname'">
+				where CONAME LIKE '%'||#{libraryKeyword}||'%' 
+				</if>
+			
+				<if test="libraryCondition == 'type'">
+				where TYPE LIKE '%'||#{libraryKeyword}||'%'
+				</if>
+			</if>
+		
+			  ORDER BY FURNITURENUM ASC
+	</select>
+	
+	<!-- 페이징_라이브러리 -->
+	<select id="libraryPaging" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM ITR_FURNITURE 
+			<if test="CompanyName != ''">
+			WHERE CONAME =#{CompanyName}
+				<if test="libraryCondition == 'furnitureName'">
+					and	furnitureName LIKE '%'||#{libraryKeyword}||'%' 
+				</if>
+			
+				<if test="libraryCondition == 'type'">
+					and	TYPE LIKE '%'||#{libraryKeyword}||'%'
+				</if>
+			</if>
+			
+			<if test="CompanyName == ''">
+				<if test="libraryCondition == 'coname'">
+				where CONAME LIKE '%'||#{libraryKeyword}||'%' 
+				</if>
+			
+				<if test="libraryCondition == 'type'">
+				where TYPE LIKE '%'||#{libraryKeyword}||'%'
+				</if>
+			</if>
+			  ORDER BY FURNITURENUM ASC
+	</select>
+	
+	<!-- 가구 열람 -->
+	<select id="libraryRead" parameterType="int" resultType="FurnitureVO">
+		SELECT * FROM ITR_FURNITURE WHERE FURNITURENUM = #{furnitureNum}
+	</select>
+	
+	<!-- 가구 삭제 -->
+	<delete id="furniturnDelete" parameterType="int" >
+		delete from ITR_FURNITURE WHERE FURNITURENUM = #{furnitureNum}
+	</delete>
+	
+	<!-- 가구 리스트 호출 (작업창)-->
+	<select id="getFurnitureList" parameterType="FurnitureVO" resultType="FurnitureVO">
+		SELECT * FROM ITR_FURNITURE 
+	</select>
+	
+	<!-- 이미지 데이터 베이스에 등록 -->
+	<insert id="uploadImg" parameterType="ImgVO">
+		INSERT INTO ITR_IMG VALUES (#{imgUuid}, #{id}, sysdate)
+	</insert>
+
+</mapper>

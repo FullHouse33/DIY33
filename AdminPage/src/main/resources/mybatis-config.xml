@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="StatVO" type="com.sesoc.test.vo.StatVO"/>
+		
+		<typeAlias alias="RankVO" type="com.sesoc.test.vo.RankVO"/>
+		
+		<typeAlias alias="CompanyVO" type="com.sesoc.test.vo.CompanyVO"/>
+
+		<typeAlias alias="FurnitureVO" type="com.sesoc.test.vo.FurnitureVO"/>
+		
+		<typeAlias alias="GalleryVO" type="com.sesoc.test.vo.GalleryVO"/>
+		
+		<typeAlias alias="ImgVO" type="com.sesoc.test.vo.ImgVO"/>
+		
+		<typeAlias alias="ModelVO" type="com.sesoc.test.vo.ModelVO"/>
+		
+		<typeAlias alias="ReplyVO" type="com.sesoc.test.vo.ReplyVO"/>
+		
+		<typeAlias alias="UserVO" type="com.sesoc.test.vo.UserVO"/>
+		
+		<typeAlias alias="Graph1VO" type="com.sesoc.test.vo.Graph1VO"/>
+		
+		<typeAlias alias="Graph2VO" type="com.sesoc.test.vo.Graph2VO"/>
+		
+		<typeAlias alias="Graph4VO" type="com.sesoc.test.vo.Graph4VO"/>
+	
+	</typeAliases>
+	<mappers>
+		<mapper resource="mapper/statsMapper.xml"/>
+		
+		<mapper resource="mapper/userMapper.xml"/>
+		
+		<mapper resource="mapper/boardMapper.xml"/>
+		
+		<mapper resource="mapper/fileMapper.xml"/>
+	</mappers>
+</configuration>

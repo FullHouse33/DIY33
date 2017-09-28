@@ -1,0 +1,27 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# 创建的文件:14.12.2016 13:38:25
+
+newmtl 01___Default
+	Ns 43.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00 
+	illum 2
+	Ka 1.00 1.00 1.00
+	Kd 1.00 1.00 1.00
+	Ks 1.37 1.37 1.37
+	Ke 0.00 0.00 0.00
+	map_refl maps\Map__17_Raytrace.tga
+
+newmtl 01___Default1
+	Ns 10.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00 
+	illum 2
+	Ka 0.89 0.89 0.89
+	Kd 0.89 0.89 0.89
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00

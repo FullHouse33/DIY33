@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sesoc.test.dao.BoardMapper">
+	<!-- 전체 게시글 읽기 -->
+	<select id="boardList" parameterType="map" resultType="GalleryVO">
+		select * from ITR_GALLERY
+		
+		<if test="searchCondition == 'stand'">
+			
+			<if test="searchkeyCondition == 'id'">
+			where id like '%'||#{searchKeyword}||'%' 
+			</if>
+			
+			<if test="searchkeyCondition == 'title'">
+			where title like '%'||#{searchKeyword}||'%' 
+			</if>
+			ORDER BY GALLERYNUM ASC
+		</if>
+		
+		<if test="searchCondition == 'hit'">
+			
+			<if test="searchkeyCondition == 'id'">
+			where id like '%'||#{searchKeyword}||'%' 
+			</if>
+			
+			<if test="searchkeyCondition == 'title'">
+			where title like '%'||#{searchKeyword}||'%' 
+			</if>
+			ORDER BY HIT ASC
+		</if>
+		
+		<if test="searchCondition == 'fastdate'">
+			
+			<if test="searchkeyCondition == 'id'">
+			where id like '%'||#{searchKeyword}||'%' 
+			</if>
+			
+			<if test="searchkeyCondition == 'title'">
+			where title like '%'||#{searchKeyword}||'%' 
+			</if>
+			ORDER BY INPUTDATE DESC
+		</if>
+		
+		<if test="searchCondition == 'pastdate'">
+			
+			<if test="searchkeyCondition == 'id'">
+			where id like '%'||#{searchKeyword}||'%' 
+			</if>
+			
+			<if test="searchkeyCondition == 'title'">
+			where title like '%'||#{searchKeyword}||'%' 
+			</if>
+			ORDER BY INPUTDATE ASC
+		</if>
+	</select>
+		
+	<!-- 페이징 -->
+	<select id="getTotal" parameterType="map" resultType="int">
+		select count(*) from ITR_GALLERY
+		
+		<if test="searchCondition == 'stand'">
+			
+			<if test="searchkeyCondition == 'id'">
+			where id like '%'||#{searchKeyword}||'%'
+			</if>
+			
+			<if test="searchkeyCondition == 'title'">
+			where title like '%'||#{searchKeyword}||'%'
+			</if>
+			ORDER BY GALLERYNUM ASC
+		</if>
+		
+		<if test="searchCondition == 'hit'">
+			
+			<if test="searchkeyCondition == 'id'">
+			where id like '%'||#{searchKeyword}||'%' 
+			</if>
+			
+			<if test="searchkeyCondition == 'title'">
+			where title like '%'||#{searchKeyword}||'%' 
+			</if>
+			ORDER BY HIT ASC
+		</if>
+		
+		<if test="searchCondition == 'fastdate'">
+			
+			<if test="searchkeyCondition == 'id'">
+			where id like '%'||#{searchKeyword}||'%'
+			</if>
+			
+			<if test="searchkeyCondition == 'title'">
+			where title like '%'||#{searchKeyword}||'%'
+			</if>
+			 ORDER BY INPUTDATE DESC
+		</if>
+		
+		<if test="searchCondition == 'pastdate'">
+			
+			<if test="searchkeyCondition == 'id'">
+			where id like '%'||#{searchKeyword}||'%'
+			</if>
+			
+			<if test="searchkeyCondition == 'title'">
+			where title like '%'||#{searchKeyword}||'%' 
+			</if>
+			ORDER BY INPUTDATE ASC
+		</if>
+		
+	</select>
+	
+	<!-- 게시글 작성 -->
+	<insert parameterType="GalleryVO" id="writeBoard">
+		INSERT INTO ITR_GALLERY VALUES ( 
+			GALLERYNUM_SEQ.NEXTVAL, 
+			#{id}, 
+			#{imgUuid}, 
+			#{title}, 
+			#{content}, 
+			sysdate, 
+			#{hit}
+		) 
+	</insert>
+
+	<!-- 게시글 읽기 -->
+	<select parameterType="int" id="readBoard" resultType="GalleryVO">
+		SELECT * FROM ITR_GALLERY WHERE GALLERYNUM = #{galleryNum} 
+	</select>
+
+	<!-- 게시글 수정 -->
+	<update parameterType="GalleryVO" id="modifyBoard"> 
+		UPDATE ITR_GALLERY SET IMGUUID = #{imgUuid}, TITLE = #{title}, CONTENT = #{content} 
+		WHERE GALLERYNUM = #{galleryNum} 
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete parameterType="int" id="deleteBoard">
+		 DELETE FROM ITR_GALLERY WHERE GALLERYNUM = #{galleryNum} 
+	</delete>
+	
+	<!-- 조회수 -->
+	<update id="addhit" parameterType="int">
+		update ITR_GALLERY set hit = hit + 1 where GALLERYNUM = #{galleryNum} 
+	</update>
+	
+	<!-- 댓글 조회 -->
+	<select id="getReplyList" parameterType="int" resultType="ReplyVO">
+		select * from ITR_REPLY where GALLERYNUM = #{galleryNum} order by replynum desc
+	</select>
+	
+	<!-- 댓글 수 -->
+	<select id="countReply" parameterType="int" resultType="int">
+		select count(*) from ITR_REPLY where GALLERYNUM = #{galleryNum} 
+	</select>
+		
+	<!-- 댓글 작성 -->
+	<insert id="writeReply" parameterType="ReplyVO">
+		insert into ITR_REPLY values(REPLYNUM_SEQ.nextval, #{galleryNum}, #{id}, #{text}, sysdate)
+	</insert>
+		
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply" parameterType="int">
+		delete ITR_REPLY where replyNum = #{replyNum}
+	</delete>
+	
+</mapper>
