@@ -13,7 +13,7 @@ public class userInterceptor extends HandlerInterceptorAdapter{
 
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
-			    
+		
 		//유저가 아니거나 admin이라면
 		if(id == null){ 
 			response.sendRedirect("/admin/");

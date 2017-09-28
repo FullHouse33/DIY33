@@ -33,6 +33,7 @@
          <mvc:mapping path="/user/userUpdateForm"/>
          <mvc:mapping path="/user/userUpdate"/>
          <mvc:mapping path="/user/userDelete"/>
+         <mvc:mapping path="/user/userRead"/>
          <!-- <mvc:mapping path="/user/userRead"/> -->
       
          <beans:ref bean="userInterceptor"/>
@@ -48,6 +49,7 @@
          <mvc:mapping path="/user/companyUpdateForm"/>
          <mvc:mapping path="/user/companyUpdate"/>
          <mvc:mapping path="/user/companyDelete"/>
+         <mvc:mapping path="/user/companyRead"/>
          <!-- <mvc:mapping path="/user/companyRead"/> -->
         
          <beans:ref bean="companyInterceptor"/>
