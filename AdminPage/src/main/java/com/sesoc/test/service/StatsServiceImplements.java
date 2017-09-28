@@ -30,8 +30,8 @@ public class StatsServiceImplements implements StatsService{
 			for (int i = 0; i < 9; i++) {
 				vo.add(i, list.get(i));
 			}
-			model.addAttribute("rank",vo);     
 		}
+		model.addAttribute("rank",vo);     
 	}
 	
 	//관리자가 전체, 기업별 좋아요 순으로 목록 조회
@@ -50,38 +50,15 @@ public class StatsServiceImplements implements StatsService{
 	//성별, 연령별 인기 제품 >> 희진이가 수정해주나? 쿄쿄
 	@Override
 	public void genFurnitureList(Model model, UserVO user) {
-	  ArrayList<RankVO> list = dao.genFurnitureList(user);
-	  ArrayList<RankVO> vo = new ArrayList<>();
-	      
-	  int birthYear = 0;
-	  if(list.size() != 0){
-	     for(int i=0; i<5; i++){
-	        birthYear = Integer.parseInt(list.get(i).getBirthYear());
-	        if(list.get(i).getGender().equals("female")){
-	           if(1998 <= birthYear && birthYear <= 1989){
-	              vo.add(list.get(i));
-	           }else if(1988 <= birthYear && birthYear <= 1979){
-	              vo.add(list.get(i));
-	           }else if(1978 <= birthYear && birthYear <= 1969){
-	              vo.add(list.get(i));
-	           }else{
-	              vo.add(list.get(i));
-	           }
-	        }else{
-	           if(1998 <= birthYear && birthYear <= 1989){
-	              vo.add(list.get(i));
-	           }else if(1988 <= birthYear && birthYear <= 1979){
-	              vo.add(list.get(i));
-	           }else if(1978 <= birthYear && birthYear <= 1969){
-	              vo.add(list.get(i));
-	           }else{
-	              vo.add(list.get(i));
-	           }
-	        }
-	     }
-	  }
-	  model.addAttribute("genList", vo);
-	 }
+	
+		ArrayList<RankVO> vo=dao.genFurnitureList(user);
+		ArrayList<RankVO> img = new ArrayList<>();
+		for(int i=0;i<3;i++){
+			img.add(vo.get(i));
+		}
+		
+		model.addAttribute("genList", img);
+		}
 
 	
 	@Override

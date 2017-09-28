@@ -169,9 +169,9 @@
             </div><!-- END REVOLUTION SLIDER -->
         </div><!-- end first slider -->
 
+            		<c:if test="${sessionScope.id != null && sessionScope.id != 'admin'}">
 			<section class="section">
 	            <div class="container">
-            		<c:if test="${sessionScope.id != null && sessionScope.id != 'admin'}">
 		                <div class="section-title text-center clearfix">
 		                    <h4>나에게 맞는 추천 가구 Top5</h4>
 		                    <hr>
@@ -188,9 +188,9 @@
 								</c:forEach>
 			                </c:if>
 		                </div><!-- end banner -->
-					</c:if>
 	            </div><!-- end container -->
 	        </section><!-- end section -->
+					</c:if>
 		
         <section class="section">
             <div class="container">

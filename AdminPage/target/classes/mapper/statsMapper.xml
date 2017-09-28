@@ -13,12 +13,9 @@
 	</select>
 
 	<!-- 성별, 연령별 인기 제품 -->
-	<select id="genFurnitureList" resultType="RankVO">
-		select count(r.id) as rank, f.furniturenum as furnitureNum, f.imgpath as imgPath, u.gender as gender, extract(year from u.birth) as birthYear
-		from itr_record r, itr_furniture f, itr_user u 
-		where r.furniturenum = f.furniturenum
-		group by f.furniturenum, f.imgpath, u.gender, extract(year from u.birth)
-		order by count(r.id) desc
+	<select id="genFurnitureList" parameterType="UserVO" resultType="RankVO">
+		select r.furniturenum,f.imgpath from itr_record r,itr_furniture f 
+		where r.id=#{id} and f.furniturenum=r.FURNITURENUM order by r.dates asc 
 	</select>
 	
 	<!-- 연도별 회사 통계 -->
