@@ -141,9 +141,10 @@
 
 		<div class="text-center"
 			style="padding-bottom: 40px; background-color: white">
+			<%-- <c:if test="${sessionScope.id ==  }"></c:if> --%>
 			<button type="button" class="btn btn-shopcart"
 				style="background-color: #89bbc4; border: #89bbc4;"
-				id="companyUpdate">Update</button>
+				id="companyUpdate" onclick="companyUpdate()">Update</button>
 			<button type="button" class="btn btn-shopcart"
 				style="background-color: #89bbc4; border: #89bbc4;"
 				id="companyDelete">Withdraw</button>
@@ -153,7 +154,7 @@
 			<div data-brackets-id="23586" class="container">
 				<div data-brackets-id="23587" class="row">
 					<div data-brackets-id="23588" class="col-md-4 col-sm-4 col-xs-12">
-						<a data-brackets-id="23589" class="navbar-brand" href="index.html"><img
+						<a data-brackets-id="23589" class="navbar-brand" href="#"><img
 							data-brackets-id="23590"
 							src="http://127.0.0.1:60627/images/logo@2x.png" alt=""
 							width="190" height="60"></a>
@@ -187,7 +188,7 @@
 							<li data-brackets-id="23612"><a data-brackets-id="23613"
 								href="#">Contact</a></li>
 							<li data-brackets-id="23614"><a data-brackets-id="23615"
-								class="topbutton" href="/admin/user/companyList">Back<i
+								class="topbutton" href="#">Back<i
 									data-brackets-id="23616" class="fa fa-angle-up"></i></a></li>
 						</ul>
 					</div>
@@ -200,8 +201,13 @@
 		<!-- top footer -->
 	</div>
 	<script>
+		function companyUpdate(){
+			//location.href = "/admin/user/companyUpdateForm?coId=${companyRead.coId}";
+			location.href = "/admin/user/companyUpdateForm?coId=${companyRead.coId}";
+		}	
+	
 		$(function(){
-			$("#companyUpdate").click(function(){
+			/* $("#companyUpdate").click(function(){
  				if(${sessionScope.id eq "admin"}){
 					alert("You do not have permission to modify!");
 					return false;
@@ -209,7 +215,7 @@
  				if(${sessionScope.id ne "admin"}){
  					location.href = "/admin/user/companyUpdateForm?coId=${companyRead.coId}";
  				}
-			}); 
+			}); */ 
 			
 			$("#companyDelete").click(function(){
 				var result = confirm("Are you sure you want to delete it?");

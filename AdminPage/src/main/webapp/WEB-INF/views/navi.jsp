@@ -54,7 +54,7 @@
 			<li><a href="/admin/board/gallery" style="font-size: 18px;">Gallery</a></li>
 			<c:if test="${sessionScope.CoId != null}">
 				<li class="dropdown hasmenu"><a
-					href="/admin/user/connectedCompany" class="dropdown-toggle"
+					href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false" style="font-size: 18px;">Company<span
 						class="fa fa-angle-down"></span></a>
@@ -75,7 +75,7 @@
 			</c:if>
 			<c:if test="${sessionScope.id == 'admin'}">
 				<li class="dropdown hasmenu"><a
-					href="/admin/user/connectedUser" class="dropdown-toggle"
+					href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false" style="font-size: 18px;">Admin<span
 						class="fa fa-angle-down"></span></a>
@@ -87,7 +87,7 @@
 						<li><a href="/admin/stats/statistics">전체 통계</a></li>
 					</ul></li>
 			</c:if>
-			<li><a href="#" style="font-size: 18px;">Contact</a></li>
+			<!-- <li><a href="#" style="font-size: 18px;">Contact</a></li> -->
 		</ul>
 		<ul class="nav navbar-nav navbar-right searchandbag">
 			<li class="dropdown hasmenu shopcartmenu"><a href="#"
@@ -172,7 +172,7 @@
 					<c:if test="${sessionScope.id != null || sessionScope.CoId != null}">
 						<li class="shopcart" style="">
 							<h4 class="row" style="text-align: center; font-size: 20px;">
-								Welcome<br>
+								Welcome ${sessionScope.id} ${sessionScope.CoId} !<br>
 								<c:if test="${sessionScope.id == 'admin'}">
 									<div class="clearfix"></div>
 									<div class="text-center">
@@ -181,17 +181,17 @@
 								</c:if>
 
 								<c:if test="${sessionScope.id != null && sessionScope.id != 'admin'}">
-		                  			${sessionScope.id}!
 		                  		<div class="clearfix"></div>
 									<div class="text-center">
+										<a href="/admin/user/userRead?id=${sessionScope.id}" class="btn btn-primary">My Page</a><br>
 										<a href="/admin/user/logout" class="btn btn-primary">LOGOUT</a>
 									</div>
 								</c:if>
 
 								<c:if test="${sessionScope.CoId != null}">
-		                  			${sessionScope.CoId}!
 		                  		<div class="clearfix"></div>
 									<div class="text-center">
+										<a href="/admin/user/companyRead?CoId=${sessionScope.CoId}" class="btn btn-primary">My Page</a><br>
 										<a href="/admin/user/logout" class="btn btn-primary">LOGOUT</a>
 									</div>
 								</c:if>
