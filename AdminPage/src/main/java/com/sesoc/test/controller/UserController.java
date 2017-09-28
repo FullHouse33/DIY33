@@ -199,7 +199,7 @@ public class UserController {
 			session.setAttribute("coAuth", result.getCoAuthority());
 		}
 		
-		return "redirect:/";
+		return "redirect:home";
 	}
 	
 	/*@RequestMapping(value="connectedCompany", method=RequestMethod.GET)

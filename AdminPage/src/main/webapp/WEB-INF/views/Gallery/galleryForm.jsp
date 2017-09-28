@@ -19,7 +19,7 @@
    content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- SITE META -->
-<title>Gallery</title>
+<title>HomeStyle | Responsive Furniture Website Template</title>
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="keywords" content="">
@@ -93,7 +93,6 @@
                   <div class="col-lg-12" style="margin-top: 20px;">
                      <div class="couponarea clearfix">
                         <form class="form-inline" style="margin-bottom: 25px;">
-
                            <div class="sel sel--black-panther"
                               style="margin: unset; width: 150px; border: 1px solid #ededed; vertical-align: middle; font-size: 10px; height: 45px;">
                               <div class="sel__box sel__box--black-panther">
@@ -146,6 +145,7 @@
                   </div>
                   <select name="searchkeyCondition" id="select-profession"
                      style="display: none;">
+
                      <option value="id">ID</option>
                      <option value="email">EMAIL</option>
                   </select>
@@ -158,7 +158,7 @@
                   <div class="pentry item-w1 item-h1 cat3 isotope-item"
                      style="width: 496px; height: 491px; position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px); opacity: 1;">
                      <a href="/admin/board/readBoard?galleryNum=${vo.galleryNum}"
-                        title=""> <img src="/admin/resources/img/${vo.imgUuid}"
+                        title=""> <img src="/admin/resources/upload/${vo.imgUuid1}"
                         style="width: 488.99px; height: 400px;">
                         <div style="display: block; left: 100%; top: 0px; transition: all 300ms ease;">
                            <span>${vo.title}</span><span>${vo.id}</span>
@@ -252,6 +252,7 @@
                + searchkeyCondition;
       }
       function galleryRead() {
+
          location.href = "/admin/board/write";
       }
    </script>

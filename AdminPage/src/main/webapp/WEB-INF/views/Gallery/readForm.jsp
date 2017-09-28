@@ -17,7 +17,7 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- SITE META -->
-<title>Gallery</title>
+<title>HomeStyle | Responsive Furniture Website Template</title>
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="keywords" content="">
@@ -63,7 +63,7 @@
 	<!-- PRELOADER -->
 	<div id="loader" style="display: none;">
 		<div class="loader-container">
-			<img src="/admin/resources/images/load.gif" alt="" class="loader-site spinner">
+			<img src="images/load.gif" alt="" class="loader-site spinner">
 		</div>
 	</div>
 	<!-- END PRELOADER -->
@@ -95,9 +95,21 @@
 										data-ride="carousel">
 										<div class="carousel-inner" role="listbox">
 											<div class="item active">
-												<img src="/admin/resources/img/${read.imgUuid}" alt=""
+												<img src="/admin/resources/upload/${read.imgUuid1}" alt=""
 													class="img-responsive">
 											</div>
+											<c:if test="${read.imgUuid2 != null}">
+											<div class="item">
+												<img src="/admin/resources/upload/${read.imgUuid2}" alt=""
+													class="img-responsive">
+											</div>
+											<c:if test="${read.imgUuid3 != null}">
+											<div class="item">
+												<img src="/admin/resources/upload/${read.imgUuid3}" alt=""
+													class="img-responsive">
+											</div>
+											</c:if>
+											</c:if>
 										</div>
 
 										<a class="left carousel-control" href="#myCarousel1"
@@ -120,8 +132,8 @@
 									<div class="post-meta">
 										<ul class="list-inline">
 											<li><a><i class="fa fa-tag"></i>ID: ${read.id}</a></li>
-											<li><a><i class="fa fa-comment"></i>댓글 수: ${count}</a></li>
-											<li><a><i class="fa fa-eye"></i>조회 수: ${read.hit}</a></li>
+											<li><a><i class="fa fa-comment"></i> 댓글수: ${count}</a></li>
+											<li><a><i class="fa fa-eye"></i>조회수 Views: ${read.hit}</a></li>
 										</ul>
 										<!-- end ul -->
 									</div>
@@ -144,7 +156,7 @@
 								<div class="blog-desc">
 									<div class="post-padding">
 										<div class="widget-title">
-											<h4>댓글 수 Comments</h4>
+											<h4>댓글수 Comments</h4>
 											<hr>
 										</div>
 										<div class="row">
@@ -201,7 +213,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4 col-sm-4 col-xs-12">
-						<a class="navbar-brand" href="#"><img
+						<a class="navbar-brand" href="index.html"><img
 							src="/admin/resources/images/logo.png" alt=""></a>
 					</div>
 					<!-- end col -->
@@ -247,7 +259,11 @@
 		$(function() {
 			getReplyList();
 		});
-		
+
+		/* function replyModify(replyNum) {
+
+		} */
+
 		function getReplyList() {
 			$.ajax({
 				url : "/admin/board/getReplyList",
@@ -313,7 +329,7 @@
 
 		//댓글 삭제
 		function deleteReply(replyNum) {
-			var result = confirm("댓글을 삭제하시겠습니까?");
+			var result = confirm("혼또니?");
 			if (result) {
 				$.ajax({
 					url : "/admin/board/deleteReply",
