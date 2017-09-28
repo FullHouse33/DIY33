@@ -25,14 +25,13 @@ public class StatsController {
 		return "/Stats/statistics";
 	}
 
+	// 관리자가 전체, 기업별 좋아요 순으로 목록 조회
 	@RequestMapping(value = "statistics", method = RequestMethod.POST)
 	@ResponseBody
 	public ArrayList<StatVO> statistics(String stat) {
-		System.out.println(stat);
 		return service.companyListAll(stat);
 	}
 
-	// 관리자가 전체, 기업별 좋아요 순으로 목록 조회
 	// @RequestMapping(value="statistics")
 	// @ResponseBody
 	// public String statistics(String stat){
