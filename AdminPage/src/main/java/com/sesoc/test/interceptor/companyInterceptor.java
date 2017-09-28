@@ -15,9 +15,9 @@ public class companyInterceptor extends HandlerInterceptorAdapter{
 		
 		String id = (String) session.getAttribute("id");
 		String coId = (String) session.getAttribute("CoId");
-		    
+		    System.out.println(coId);
 		//기업 유저가 아니거나 관리자가 아니면
-		if(coId == null || id != "admin"){  
+		if(coId == null){  
 			response.sendRedirect("/admin/");
 			return false;
 		}

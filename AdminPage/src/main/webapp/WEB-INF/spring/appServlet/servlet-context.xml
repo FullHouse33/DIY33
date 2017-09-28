@@ -63,6 +63,7 @@
          <mvc:mapping path="/user/userList"/>
          <mvc:mapping path="/user/companyList"/>
          <mvc:mapping path="/user/authority"/>
+          <mvc:mapping path="/stats/statistics"/>
          
          <beans:ref bean="adminInterceptor"/>
       </mvc:interceptor>

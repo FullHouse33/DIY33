@@ -13,7 +13,7 @@ public class adminInterceptor extends HandlerInterceptorAdapter{
 
 	   	HttpSession session = request.getSession();
 	   	String id = (String) session.getAttribute("id");
-	    
+	    System.out.println(id);
       	if(!"admin".equals(id)){
       		response.sendRedirect("/admin/");
             return false;
