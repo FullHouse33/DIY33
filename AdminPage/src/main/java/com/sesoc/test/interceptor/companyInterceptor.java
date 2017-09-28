@@ -11,7 +11,7 @@ public class companyInterceptor extends HandlerInterceptorAdapter{
    @Override
    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object obj) throws Exception {
 
-		HttpSession session = request.getSession();
+		/*HttpSession session = request.getSession();
 		
 		String id = (String) session.getAttribute("id");
 		String coId = (String) session.getAttribute("CoId");
@@ -20,7 +20,7 @@ public class companyInterceptor extends HandlerInterceptorAdapter{
 		if(coId == null){  
 			response.sendRedirect("/admin/");
 			return false;
-		}
+		}*/
 		  
 		return true;
    }

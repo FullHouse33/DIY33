@@ -10,7 +10,7 @@ public class userInterceptor extends HandlerInterceptorAdapter{
 
    @Override
    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object obj) throws Exception {
-
+/*
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		
@@ -18,7 +18,7 @@ public class userInterceptor extends HandlerInterceptorAdapter{
 		if(id == null){ 
 			response.sendRedirect("/admin/");
 			return false;
-		}
+		}*/
 		      
 		return true;
    }
