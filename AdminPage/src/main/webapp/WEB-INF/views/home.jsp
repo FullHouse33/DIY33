@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- SITE META -->
-    <title>Home</title>
+    <title>Home</title><!-- test -->
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="keywords" content="">
