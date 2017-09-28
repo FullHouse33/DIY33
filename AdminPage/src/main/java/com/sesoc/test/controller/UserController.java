@@ -190,9 +190,9 @@ public class UserController {
 		CompanyVO result = service.loginCompany(company);
 		
 		if(result != null){
-			session.setAttribute("CoId", result.getCoId());
+			session.setAttribute("CoId", result.getCompanyId());
 			session.setAttribute("coName", result.getCoName());
-			session.setAttribute("coPwd", result.getCoPwd());
+			session.setAttribute("coPwd", result.getCompanyPwd());
 			session.setAttribute("coAuth", result.getCoAuthority());
 		}
 		

@@ -169,7 +169,7 @@ public class UserServiceImpl implements UserService{
 		ArrayList<String> list2 = new ArrayList<>();
 		
 		for (CompanyVO companyVO : list) {
-			String id = companyVO.getCoId();
+			String id = companyVO.getCompanyId();
 			StringBuffer newid = new StringBuffer(id);
 			newid.replace(2, 6,"****");
 			String reid = new String(newid);
@@ -200,14 +200,14 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean companyPwd(String coId, String coManagerEmail) {
 		CompanyVO vo = new CompanyVO();
-		vo.setCoId(coId);
+		vo.setCompanyId(coId);
 		vo.setCoManagerEmail(coManagerEmail);
 		CompanyVO newvo=dao.companyPwd(vo);
 		
 		if(newvo==null){
 			return false;
 		}else{
-			Mail.sendMail2(newvo.getCoManagerEmail(),newvo.getCoPwd());
+			Mail.sendMail2(newvo.getCoManagerEmail(),newvo.getCompanyPwd());
 			return true;
 		}
 	}

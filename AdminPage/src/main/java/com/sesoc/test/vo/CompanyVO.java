@@ -12,10 +12,10 @@ public class CompanyVO {
 	private String coName;
 
 	/** COMPANY 아이디. */
-	private String coId;
+	private String companyId;
 
 	/** COMPANY 비밀번호. */
-	private String coPwd;
+	private String companyPwd;
 
 	/** COMPANY 전화번호. */
 	private String coTel;
@@ -34,12 +34,12 @@ public class CompanyVO {
 
 	public CompanyVO() {}
 
-	public CompanyVO(String coName, String coId, String coPwd, String coTel, String coManagerName, String coManagerDept,
-			String coManagerEmail, int coAuthority) {
+	public CompanyVO(String coName, String companyId, String companyPwd, String coTel, String coManagerName,
+			String coManagerDept, String coManagerEmail, int coAuthority) {
 		super();
 		this.coName = coName;
-		this.coId = coId;
-		this.coPwd = coPwd;
+		this.companyId = companyId;
+		this.companyPwd = companyPwd;
 		this.coTel = coTel;
 		this.coManagerName = coManagerName;
 		this.coManagerDept = coManagerDept;
@@ -55,20 +55,20 @@ public class CompanyVO {
 		this.coName = coName;
 	}
 
-	public String getCoId() {
-		return coId;
+	public String getCompanyId() {
+		return companyId;
 	}
 
-	public void setCoId(String coId) {
-		this.coId = coId;
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 
-	public String getCoPwd() {
-		return coPwd;
+	public String getCompanyPwd() {
+		return companyPwd;
 	}
 
-	public void setCoPwd(String coPwd) {
-		this.coPwd = coPwd;
+	public void setCompanyPwd(String companyPwd) {
+		this.companyPwd = companyPwd;
 	}
 
 	public String getCoTel() {
@@ -113,9 +113,18 @@ public class CompanyVO {
 
 	@Override
 	public String toString() {
-		return "CompanyVO [coName=" + coName + ", coId=" + coId + ", coPwd=" + coPwd + ", coTel=" + coTel
-				+ ", coManagerName=" + coManagerName + ", coManagerDept=" + coManagerDept + ", coManagerEmail="
+		return "CompanyVO [coName=" + coName + ", companyId=" + companyId + ", companyPwd=" + companyPwd + ", coTel="
+				+ coTel + ", coManagerName=" + coManagerName + ", coManagerDept=" + coManagerDept + ", coManagerEmail="
 				+ coManagerEmail + ", coAuthority=" + coAuthority + "]";
 	}
-
+	
+	
+	
+	
+	
+	
+	
 }
+	
+	
+	
