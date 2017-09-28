@@ -11,7 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sesoc.test.dao.BoardDao;
 import com.sesoc.test.util.PageNavigator;
 import com.sesoc.test.vo.GalleryVO;
+import com.sesoc.test.vo.ImgVO;
 import com.sesoc.test.vo.ReplyVO;
+import com.sesoc.test.vo.UserVO;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -48,9 +50,7 @@ public class BoardServiceImpl implements BoardService{
 
 	//게시글 작성
 	@Override
-	public void writeBoard(GalleryVO gallery, MultipartFile uploadFile) {
-		String img = uploadFile.getOriginalFilename();
-		gallery.setImgUuid(img);
+	public void writeBoard(GalleryVO gallery) {
 		dao.writeBoard(gallery);
 	}
 
@@ -62,9 +62,7 @@ public class BoardServiceImpl implements BoardService{
 
 	//게시글 수정
 	@Override
-	public void modifyBoard(GalleryVO gallery,MultipartFile uploadFile) {
-		String img = uploadFile.getOriginalFilename();
-		gallery.setImgUuid(img);
+	public void modifyBoard(GalleryVO gallery) {
 		dao.modifyBoard(gallery);
 	}
 
@@ -86,4 +84,9 @@ public class BoardServiceImpl implements BoardService{
 		dao.deleteReply(replyNum);
 	}
 	
+	@Override
+	public ArrayList<ImgVO> getUserImg(UserVO userVO) {
+		return dao.getUserImg(userVO);
+	}
+
 }

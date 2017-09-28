@@ -566,22 +566,27 @@ canvas {
 	background: #bfbfbf;
 }
 
- .thumbnail{
-      /* background-color:gray; */
-      margin:10px;
-      width:150px;
-      height:150px;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
-    }
-    .thumbnail.round{
-      border-radius: 10%;
-    }
-    .thumbnail.circle{
-      border-radius: 100%;
-    }
+.thumbnail {
+	/* background-color:gray; */
+	margin: 10px;
+	width: 150px;
+	height: 150px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
 
+.thumbnail.round {
+	border-radius: 10%;
+}
+
+.thumbnail.circle {
+	border-radius: 100%;
+}
+.furImg:hover{
+	background: rgba(137, 187, 196, 0.5);
+	border-radius: 10px;
+}
 </style>
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"
@@ -618,6 +623,14 @@ canvas {
 			var cubeGeo, cubeMaterial;
         
 			//sj var
+			var selectWall = '';
+			var wallTexture = 0;
+			var scaleValue = 0.1;
+			var isScaled = 0;
+			var preSelectFurniUUid;
+			var selectFurniture = null;
+			var selectState = 0;
+			var path = "/admin/resources/file/";
             //바닥
             var floor;
             var voxel, voxel2, voxel3, voxel4;
@@ -653,7 +666,9 @@ canvas {
             var furnitureMat;
             //tmp
             var tmpSphere;
-           
+            var cntW = 0;
+            var cntF = 0;
+            
             //그리드 헬퍼
             var gridHelper;
             // 선택 
@@ -718,7 +733,7 @@ canvas {
                 //planeGeo = new THREE.BoxGeometry( 700, 250, 10 );
 				//planeMaterial = new THREE.MeshBasicMaterial( {color: 0xEDEDED, side: THREE.DoubleSide} );
                 /*var wallTexture = THREE.ImageUtils.loadTexture('../editor/textures/depositphotos_83939646-stock-illustration-wallpaper-texture.jpg');//, {}, function(){renderer.render(scene)});*/
-                wallTexture = THREE.ImageUtils.loadTexture('../editor/textures/wallPaper1.jpg');
+                wallTexture = THREE.ImageUtils.loadTexture(path+'/wall2.png');
                 
                 
                 //console.log(wallMaterials);
@@ -841,35 +856,45 @@ canvas {
 			}
         
             function onDocumentDblClick( event ) {
-                event.preventDefault();
+                /* event.preventDefault();
 				mouse.set( ( (event.clientX-0.100) / (window.innerWidth) * 2 - 1, - ( (event.clientY-60) / (window.innerHeight-60) ) * 2 + 1 ) );
                 raycaster.setFromCamera( mouse, camera );
                 
-                var intersects = raycaster.intersectObjects( objects );
+                var obj = scene.children;
+                
+                var intersects = raycaster.intersectObjects( obj , true);
+                //var intersects = raycaster.intersectObjects( objects );
 
 				if ( intersects.length > 0 ) {
 
 					var intersect = intersects[ 0 ];
+					
+					console.log("dbclk:"+state);
+					
                     if(state == 0)
                     {
                        if(intersect.object.name === 'wall')
                         {
+                    	   
                             for(var i = 0; i<6; ++i){
                                 intersect.object.material[i].transparent = true;
                                 intersect.object.material[i].opacity = 0.5;
                             }
                         }
+                       
                     }
                 
-                }
+                } */
             }
         
         
             function onDocumentMouseWheel( event ) {
                 event.preventDefault();
+                
+                //wheelDeltaY = event.deltaY;
+                
                 camera.zoom
 				camera.updateProjectionMatrix();
-                
             }
         
 
@@ -878,8 +903,9 @@ canvas {
 				event.preventDefault();
 				mouse.set( ( (event.clientX-0.100) / window.innerWidth) * 2 - 1, - ( (event.clientY-60) / (window.innerHeight-60) ) * 2 + 1 );
                 raycaster.setFromCamera( mouse, camera );
-
-				var intersects = raycaster.intersectObjects( objects );
+				var obj = scene.children;
+				 var intersects = raycaster.intersectObjects( objects ); 
+				//var intersects = raycaster.intersectObjects( obj );
 
 				if ( intersects.length > 0 ) {
 
@@ -887,8 +913,7 @@ canvas {
                     if(state == 0)
                     {
 
-                    }
-					else if(state == 1){
+                    }else if(state == 1){
 						
 						scene.add( rollOverMesh );
 						rollOverMesh.position.copy( intersect.point ).add( intersect.face.normal );
@@ -935,14 +960,11 @@ canvas {
                         
                         var floorGeometry = new THREE.BoxGeometry( 600, 600 ); // 바닥
 				        floorGeometry.rotateX( - Math.PI / 2 );
-                        var floortextyre = THREE.ImageUtils.loadTexture('../editor/textures/floorTexture.jpg')
-                
-                
+                        var floortextyre = THREE.ImageUtils.loadTexture(path+'/1_Hardwood.jpg')
+
 				        floor = new THREE.Mesh( floorGeometry,  new THREE.MeshPhongMaterial({ map: floortextyre }));   
                         
-                        
-                        
-                    	voxel.position.copy( intersect.point ).add( intersect.face.normal );            
+                        voxel.position.copy( intersect.point ).add( intersect.face.normal );            
 			            voxel.position.divideScalar( 10 ).floor().multiplyScalar( 10 ).addScalar( 5 );
 			            voxel.name = 'wall';   
                         voxel.position.z = intersect.point.z -300;
@@ -959,7 +981,8 @@ canvas {
 			    		voxel3.name = 'wall';   
                 		voxel3.position.x = intersect.point.x -300;
 			    		voxel3.position.y = 110;
-                		voxel4.position.copy( intersect.point ).add( intersect.face.normal );            
+                		
+			    		voxel4.position.copy( intersect.point ).add( intersect.face.normal );            
 			    		voxel4.position.divideScalar( 10 ).floor().multiplyScalar( 10 ).addScalar( 5 );
 			    		voxel4.name = 'wall';   
 		                voxel4.position.x = intersect.point.x +300;
@@ -1006,9 +1029,30 @@ canvas {
                     // 임시 가구
                     else if(state == 7) // 가구 배치
                     {
-                        rollOverFurniture.position.copy( intersect.point ).add( intersect.face.normal );
-                        scene.add( rollOverFurniture );
-                        rollOverState = 5;    
+                    	if( intersect.object.name == 'plane' || intersect.object.name == 'plane2'){
+                    		
+                    		if(selectState == 0){
+                    		
+                    		rollOverFurniture.position.copy( intersect.point ).add( intersect.face.normal );
+                            rollOverFurniture.position.y = 0;
+                            rollOverFurniture.scale.set(scaleValue,scaleValue,scaleValue);
+                    		scene.add( rollOverFurniture );	
+                    		rollOverState = 5;
+                    		}
+                    		else
+                    		{
+                    			selectFurniture.position.copy( intersect.point ).add( intersect.face.normal );
+                    			selectFurniture.position.y = 0;
+                    			selectFurniture.scale.set(scaleValue,scaleValue,scaleValue);
+                    			scene.add( selectFurniture );	
+                        		rollOverState = 5;
+                        		//selectState = 0;
+                    		}
+                        		//console.log(wheelDeltaY);
+                            
+                    		
+                    	}
+                    	
                      
 				    }                    
                     else if(state == 10)
@@ -1059,21 +1103,90 @@ canvas {
 
 				event.preventDefault();
                 
-                
-                switch ( event.buttons ) {
-
-				case 1: // left-click
-                            
 				/*mouse.set( ( (event.clientX-191.975) / (window.innerWidth*0.75) ) * 2 - 1, - ( (event.clientY-91.550) / (window.innerHeight*0.75) ) * 2 + 1 );*/
-                mouse.set( ( (event.clientX-0.100) / window.innerWidth) * 2 - 1, - ( (event.clientY-60) / (window.innerHeight-60) ) * 2 + 1 );        
+                mouse.set( (( (event.clientX-0.100) / window.innerWidth) * 2 - 1), - ( (event.clientY-60) / (window.innerHeight-60) ) * 2 + 1 );        
 
 				raycaster.setFromCamera( mouse, camera );
 
 				var intersects = raycaster.intersectObjects( objects );
+				var obj = scene.children;
+				
+                switch ( event.buttons ) {
 
+				case 1: // left-click
+                            
 				if ( intersects.length > 0 ) {
 
 					var intersect = intersects[ 0 ];
+								
+					if( state == 0 )
+					{	
+						var intersects = raycaster.intersectObjects( obj , true);
+						var intersect = intersects[ 0 ];
+						
+						if(intersect.object.parent.name === "furniture")
+						{
+							 
+								//RollOver~ Mat Lib var 
+								/* var roll;
+								roll = roll.copy(rollOverFurniture);
+								console.log(roll); */
+								
+								preSelectFurniUUid = intersect.object.parent.uuid;
+								console.log('object.parentuuid : '+ preSelectFurniUUid);
+								selectFurniture = new THREE.Object3D();	
+								selectFurniture = intersect.object.parent.clone();
+								//rollOverFurniture = test;
+
+								for(var i = 0; i<selectFurniture.children.length; ++i){
+									selectFurniture.children[i].material.transparent = true;
+									selectFurniture.children[i].material.opacity = 0.5;
+									//intersect.object.parent.scale.set(1,1,1);
+                            	}
+								
+								/* for(var i =89; i<objects.length; ++i){
+									
+									if(objects[i].uuid == intersect.object.parent.uuid)
+									{
+										console.log('!!@$!@#!@%!@$!@');
+										scene.remove(objects[i]);
+									}
+								} */
+								cntF = 1;
+								state = 7;
+								selectState = 1;
+							
+						}
+						
+						if(intersect.object.name === 'wall')
+                        {
+                    	   if(cntW == 0){
+                    		   wallTexture = 1;
+                    		   console.log("!2");
+                    		   selectWall = intersect.object;
+                            for(var i = 0; i<6; ++i){
+                                intersect.object.material[i].transparent = true;
+                                intersect.object.material[i].opacity = 0.5;
+                            }
+                            cntW = 1;
+                    		   
+                    	   }
+                    	   else
+                    	   {
+                    		   wallTexture = 0;
+                    		   selectWall = 0;
+                    		   console.log("!!");
+                    		   for(var i = 0; i<6; ++i){
+                                   intersect.object.material[i].transparent = false;
+                                   
+                               }
+                    		   cntW = 0;
+                    	   }
+                    		   
+                        }
+						
+					}
+					
                     
                     
 					// delete cube
@@ -1138,7 +1251,7 @@ canvas {
                                 stateEdit = 0;
                                 createWall(intersect);
                             }
-                            
+                            //state = 0;
                             saveCurState(objects);
                         
 						}
@@ -1204,25 +1317,45 @@ canvas {
                                 createWall(intersect);
                             }
                             stateEdit = 0;
+                            state = 0;
+                            rollOverState = 0;
                             saveCurState(objects);      
                         }
                         else if(rollOverState === 5) // 가구배치
                         {
                             
                             //scene.remove(intersect.object);
+                            if(selectState == 0){
+                            	furnitureObj = rollOverFurniture;
+                            }
+                            else{
+                                furnitureObj = selectFurniture;
+                                for(var i = 0; i<furnitureObj.children.length; ++i){
+									furnitureObj.children[i].material.transparent = false;
+                                }
+                                console.log(objects.length);
+                                for(var i = 88; i<objects.length; ++i){
+                                	if(objects[i].uuid === preSelectFurniUUid)
+                                	{
+                                		console.log('===5 : '+preSelectFurniUUid);
+                                		console.log('why so serious?');
+                                		scene.remove(objects[i]);
+                                		objects.splice( objects.indexOf( objects[i]), 1 );
+                                	}
+                                }
+                                selectState = 0;
+                            }
                             
-                            furnitureObj = rollOverFurniture;
                             furnitureObj.position.copy( intersect.point ).add( intersect.face.normal );
-                           
-                            if(furnitureObj.name == 'tv')
+                            /* if(furnitureObj.name == 'tv')
                             {
                                 furnitureObj.position.y = 45;        
                             }
-                            
+                             */
+                             
                             if(stateEdit == 0)
                             {
-                               createFurni(intersect);
-                              
+                            	createFurni(intersect);
                             }
                             else if(stateEdit == 1)
                             {  
@@ -1236,6 +1369,7 @@ canvas {
                                 stateEdit = 0;
                                 createFurni(intersect);
                             }
+                            
                             
                         }
                         else if(rollOverState === 6) // 창문배치
@@ -1293,8 +1427,8 @@ canvas {
                 }
                 else if(state == 4)
                 {
-                    rollOverWall.rotateY( -Math.PI / 2 );
-                    rotateState = 3;
+                  /*   rollOverWall.rotateY( -Math.PI / 2 );
+                    rotateState = 3; */
                 }
                 else if(state == 6)
                 {
@@ -1304,6 +1438,9 @@ canvas {
                 else if(state == 7)
                 {  
                     rollOverFurniture.rotateY( -Math.PI / 2 ); 
+                    if(selectFurniture !== null){
+                    selectFurniture.rotateY( -Math.PI / 2 );
+                    }
                     rotateState = 3;
                 }
                         
@@ -1324,10 +1461,14 @@ canvas {
             }
 
 			function onDocumentKeyDown( event ) {
-				+(window.innerWidth*0.15)
+				//+(window.innerWidth*0.15)
 				switch( event.keyCode ) {
 
 					case 16: isShiftDown = true; break;
+					
+					case 107 : isScaled = 2; break;// +
+					
+					case 109 : isScaled = 1; break;// -
 
 				}
 
@@ -1392,52 +1533,54 @@ canvas {
 	            	console.log("파렛트 state :"+ state);
 	            };
                 this.File = ''
-	            this.SaveScene = function()
+	            this.saveScene = function()
                 {
                     
-                    for(var i=0; i<objects.length; ++i){
+                    for(var i=89; i<objects.length; ++i){
                         console.log(objects[i].name);
-                      if(objects[i].name == 'door'){
+                      /* if(objects[i].name == 'door'){
                           tmlDoor.push(objects[i].position);                          
                       }
-                      else
+                      else */
                        sceneSave[i] = JSON.parse(JSON.stringify((Object)(objects[i])));                       
                     }
                     console.log(sceneSave);
                     console.log(sceneSave.length);
                     
                 };
-                this.LoadScene = function()//씬 불러오기 9.15 01:56
+                this.loadScene = function()//씬 불러오기 9.15 01:56
                 {
                    camera.removeAll;
                    objects = [];
                    console.log(objects.length);
                   
-                   var loader = new THREE.ObjectLoader();
-                   for(var j=0; j<sceneSave.length; ++j){
-                    
-                       console.log(sceneSave[j]);
-                        
-                            if(loader.parse(sceneSave[j]).name === 'plane'){
-                                var planeObj = loader.parse(sceneSave[j]);
-                                alert('!!!');
-                                planeObj.rotateX(-Math.PI / 2);    
-                                scene.add(planeObj);
-                                objects.push(planeObj);
-                            }
-                       else{
-                           // console.log(loader.parse(sceneSave[j]));
-                            scene.add(loader.parse(sceneSave[j]));                    
-                            objects.push(loader.parse(sceneSave[j]));                       
-                       }
+                   var loader = new THREE.ObjectLoader(); 
+                   for(var j=89; j<sceneSave.length; ++j)
+                   {
+                      console.log(sceneSave[j]);
+                      console.log([j]);
+                   	   
+                      if(loader.parse(sceneSave[j]).name === 'plane2'){
+                         var planeObj = loader.parse(sceneSave[j]);
+                         alert('!!!');
+                         planeObj.rotateX(-Math.PI / 2);    
+                         scene.add(planeObj);
+                         objects.push(planeObj);
+                      
+                   	  } 
+                   	  else
+                   	  {
+                     	scene.add(loader.parse(sceneSave[j]));                    
+                        objects.push(loader.parse(sceneSave[j]));                       
+                      }
                    }
-                    var filePath = '../editor/obj/';
+                    //var filePath = '../editor/obj/';
                     //var objName = 'GroupeMillet-M3D_Alu_Porte_Fenetre_2_vantaux-3D';
-                    var objName = 'Ermetika-SWING_Tirant_Pull_Wall_Thickness_100_mm-3D';
+                    //var objName = 'Ermetika-SWING_Tirant_Pull_Wall_Thickness_100_mm-3D';
                     //Tilt_and_slide_door_Inova
-                    makeDoor(filePath,objName);
+                    //makeDoor(filePath,objName);
                     
-                    scene.add(rollOverFurniture);
+                    //scene.add(rollOverFurniture);
                     //objects.push(rollOverFurniture);
                     
                 };
@@ -1525,15 +1668,15 @@ canvas {
 	            };
                 this.createTempleteBricks = function()
 	            {	
-                  planeGeo = new THREE.BoxGeometry( 600, 220, 10 );
+                  	planeGeo = new THREE.BoxGeometry( 600, 220, 10 );
                 
-                        voxel = new THREE.Mesh( planeGeo,new THREE.MeshBasicMaterial( { color: 0x009933, opacity: 0.5, transparent: true } ) );
-			            voxel2 = new THREE.Mesh( planeGeo,new THREE.MeshBasicMaterial( { color: 0x009933, opacity: 0.5, transparent: true } ) );
-			            voxel3 = new THREE.Mesh(  new THREE.BoxGeometry( 10, 220, 600 ),new THREE.MeshBasicMaterial( { color: 0x009933, opacity: 0.5, transparent: true } ) );
-					      voxel4 = new THREE.Mesh(  new THREE.BoxGeometry( 10, 220, 600 ),new THREE.MeshBasicMaterial( { color: 0x009933, opacity: 0.5, transparent: true } ) );
-			    
-                        rollOverWall = new THREE.Object3D();
-                        state = 4;
+                    voxel = new THREE.Mesh( planeGeo,new THREE.MeshBasicMaterial( { color: 0x009933, opacity: 0.5, transparent: true } ) );
+			        voxel2 = new THREE.Mesh( planeGeo,new THREE.MeshBasicMaterial( { color: 0x009933, opacity: 0.5, transparent: true } ) );
+			        voxel3 = new THREE.Mesh(  new THREE.BoxGeometry( 10, 220, 600 ),new THREE.MeshBasicMaterial( { color: 0x009933, opacity: 0.5, transparent: true } ) );
+					voxel4 = new THREE.Mesh(  new THREE.BoxGeometry( 10, 220, 600 ),new THREE.MeshBasicMaterial( { color: 0x009933, opacity: 0.5, transparent: true } ) );
+					
+                    rollOverWall = new THREE.Object3D();
+                    state = 4;
 	            	
 	            };
 	            this.Edit='';
@@ -1649,6 +1792,7 @@ canvas {
                     setTimeout(function(){state = 7;  rollOverFurniture.name = 'tv'; console.log('complete');},1000);
                    
                 }
+                //동근
                 this.getFurnitureList = function()
                 {
                 	$.ajax({
@@ -1656,10 +1800,12 @@ canvas {
     					type : "post",
     					data : {},
     					success : function(result){
+//     						alert("${sessionScope.objList}[0]");
+//     						동근 수정bbbb
     						$(".furniList").empty();
-    						var path = "/admin/resources/file/";
+    						
     						var addRow = "";
-    						addRow = '<tr><th>1</th><th>2</th><th>3</th></tr>';
+//     						addRow = '<tr><th>1</th><th>2</th><th>3</th></tr>';
     						$(".furniList").append(addRow);
     						addRow = '<tr>';
     						var cnt = 0;
@@ -1667,16 +1813,15 @@ canvas {
     						$(result).each(
     							function(index, item){
     								
-    								if(cnt < 3){    									
-    								//addRow +='<td><img src="'+path+item.imgPath+'" style="width:50px;height:50px;" onclick=""></td>';
+    								if(cnt < 4){
     								var obj = item.objPath;
     								var mtl = item.mtlPath;
-    								addRow +='<td><img src="'+path+item.imgPath+'" style="width:50px;height:50px;" onclick="UIcontrols.buildFurni('+'\''+obj+'\''+','+'\''+mtl+'\')"></td>';
+    								addRow +='<td class="furImg"><img src="'+path+item.imgPath+'" style="width:70px;height:70px; margin:5px" onclick="UIcontrols.buildFurni('+'\''+obj+'\''+','+'\''+mtl+'\')"></td>';
 
 									++cnt;	   
     								}
     								
-									if(cnt == 3){
+									if(cnt == 4){
 									addRow += '</tr>';	
 									$(".furniList").append(addRow);
 									cnt = 0;
@@ -1688,16 +1833,277 @@ canvas {
     					
     				}); 
                 };
+                this.getTableList = function()
+                {
+                	$.ajax({
+    					url : "/admin/file/getTableList",
+    					type : "post",
+    					data : {},
+    					success : function(result){
+//     						alert("${sessionScope.objList}[0]");
+//     						동근 수정bbbb
+    						$(".tableList").empty();
+    						
+    						var addRow = "";
+//     						addRow = '<tr><th>1</th><th>2</th><th>3</th></tr>';
+    						$(".tableList").append(addRow);
+    						addRow = '<tr>';
+    						var cnt = 0;
+    						//ㅇㅇㅇㅇ
+    						$(result).each(
+    							function(index, item){
+    								
+    								if(cnt < 4){
+    								var obj = item.objPath;
+    								var mtl = item.mtlPath;
+    								addRow +='<td class="furImg"><img src="'+path+item.imgPath+'" style="width:70px;height:70px; margin:5px" onclick="UIcontrols.buildFurni('+'\''+obj+'\''+','+'\''+mtl+'\')"></td>';
+
+									++cnt;	   
+    								}
+    								
+									if(cnt == 4){
+									addRow += '</tr>';	
+									$(".tableList").append(addRow);
+									cnt = 0;
+									addRow = '<tr>';
+									}
+    								
+    						})
+    					},
+    					
+    				}); 
+                };
+                this.getChairList = function()
+                {
+                	$.ajax({
+    					url : "/admin/file/getChairList",
+    					type : "post",
+    					data : {},
+    					success : function(result){
+//     						alert("${sessionScope.objList}[0]");
+//     						동근 수정bbbb
+    						$(".chairList").empty();
+    						
+    						var addRow = "";
+//     						addRow = '<tr><th>1</th><th>2</th><th>3</th></tr>';
+    						$(".chairList").append(addRow);
+    						addRow = '<tr>';
+    						var cnt = 0;
+    						//ㅇㅇㅇㅇ
+    						$(result).each(
+    							function(index, item){
+    								
+    								if(cnt < 4){
+    								var obj = item.objPath;
+    								var mtl = item.mtlPath;
+    								addRow +='<td class="furImg"><img src="'+path+item.imgPath+'" style="width:70px;height:70px; margin:5px" onclick="UIcontrols.buildFurni('+'\''+obj+'\''+','+'\''+mtl+'\')"></td>';
+
+									++cnt;	   
+    								}
+    								
+									if(cnt == 4){
+									addRow += '</tr>';	
+									$(".chairList").append(addRow);
+									cnt = 0;
+									addRow = '<tr>';
+									}
+    								
+    						})
+    					},
+    					
+    				}); 
+                };
+                this.getSofaList = function()
+                {
+                	$.ajax({
+    					url : "/admin/file/getSofaList",
+    					type : "post",
+    					data : {},
+    					success : function(result){
+//     						alert("${sessionScope.objList}[0]");
+//     						동근 수정bbbb
+    						$(".sofaList").empty();
+    						
+    						var addRow = "";
+//     						addRow = '<tr><th>1</th><th>2</th><th>3</th></tr>';
+    						$(".sofaList").append(addRow);
+    						addRow = '<tr>';
+    						var cnt = 0;
+    						//ㅇㅇㅇㅇ
+    						$(result).each(
+    							function(index, item){
+    								
+    								if(cnt < 4){
+    								var obj = item.objPath;
+    								var mtl = item.mtlPath;
+    								addRow +='<td class="furImg"><img src="'+path+item.imgPath+'" style="width:70px;height:70px; margin:5px" onclick="UIcontrols.buildFurni('+'\''+obj+'\''+','+'\''+mtl+'\')"></td>';
+
+									++cnt;	   
+    								}
+    								
+									if(cnt == 4){
+									addRow += '</tr>';	
+									$(".sofaList").append(addRow);
+									cnt = 0;
+									addRow = '<tr>';
+									}
+    								
+    						})
+    					},
+    					
+    				}); 
+                };
+                this.getBedList = function()
+                {
+                	$.ajax({
+    					url : "/admin/file/getBedList",
+    					type : "post",
+    					data : {},
+    					success : function(result){
+//     						alert("${sessionScope.objList}[0]");
+//     						동근 수정bbbb
+    						$(".bedList").empty();
+    						
+    						var addRow = "";
+//     						addRow = '<tr><th>1</th><th>2</th><th>3</th></tr>';
+    						$(".bedList").append(addRow);
+    						addRow = '<tr>';
+    						var cnt = 0;
+    						//ㅇㅇㅇㅇ
+    						$(result).each(
+    							function(index, item){
+    								
+    								if(cnt < 4){
+    								var obj = item.objPath;
+    								var mtl = item.mtlPath;
+    								addRow +='<td class="furImg"><img src="'+path+item.imgPath+'" style="width:70px;height:70px; margin:5px" onclick="UIcontrols.buildFurni('+'\''+obj+'\''+','+'\''+mtl+'\')"></td>';
+
+									++cnt;	   
+    								}
+    								
+									if(cnt == 4){
+									addRow += '</tr>';	
+									$(".bedList").append(addRow);
+									cnt = 0;
+									addRow = '<tr>';
+									}
+    								
+    						})
+    					},
+    					
+    				}); 
+                };
+                this.getClosetList = function()
+                {
+                	$.ajax({
+    					url : "/admin/file/getClosetList",
+    					type : "post",
+    					data : {},
+    					success : function(result){
+//     						alert("${sessionScope.objList}[0]");
+//     						동근 수정bbbb
+    						$(".closetList").empty();
+    						
+    						var addRow = "";
+//     						addRow = '<tr><th>1</th><th>2</th><th>3</th></tr>';
+    						$(".closetList").append(addRow);
+    						addRow = '<tr>';
+    						var cnt = 0;
+    						//ㅇㅇㅇㅇ
+    						$(result).each(
+    							function(index, item){
+    								
+    								if(cnt < 4){
+    								var obj = item.objPath;
+    								var mtl = item.mtlPath;
+    								addRow +='<td class="furImg"><img src="'+path+item.imgPath+'" style="width:70px;height:70px; margin:5px" onclick="UIcontrols.buildFurni('+'\''+obj+'\''+','+'\''+mtl+'\')"></td>';
+
+									++cnt;	   
+    								}
+    								
+									if(cnt == 4){
+									addRow += '</tr>';	
+									$(".closetList").append(addRow);
+									cnt = 0;
+									addRow = '<tr>';
+									}
+    								
+    						})
+    					},
+    					
+    				}); 
+                };
+                this.getOthersList = function()
+                {
+                	$.ajax({
+    					url : "/admin/file/getOthersList",
+    					type : "post",
+    					data : {},
+    					success : function(result){
+//     						alert("${sessionScope.objList}[0]");
+//     						동근 수정bbbb
+    						$(".othersList").empty();
+    						
+    						var addRow = "";
+//     						addRow = '<tr><th>1</th><th>2</th><th>3</th></tr>';
+    						$(".othersList").append(addRow);
+    						addRow = '<tr>';
+    						var cnt = 0;
+    						//ㅇㅇㅇㅇ
+    						$(result).each(
+    							function(index, item){
+    								
+    								if(cnt < 4){
+    								var obj = item.objPath;
+    								var mtl = item.mtlPath;
+    								addRow +='<td class="furImg"><img src="'+path+item.imgPath+'" style="width:70px;height:70px; margin:5px" onclick="UIcontrols.buildFurni('+'\''+obj+'\''+','+'\''+mtl+'\')"></td>';
+
+									++cnt;	   
+    								}
+    								
+									if(cnt == 4){
+									addRow += '</tr>';	
+									$(".othersList").append(addRow);
+									cnt = 0;
+									addRow = '<tr>';
+									}
+    								
+    						})
+    					},
+    					
+    				}); 
+                };
+// 							동근수정
               //임시_식탁
                 this.buildFurni = function(objPath,mtlPath)
                 {  
+            	  	console.log('1111');
             	  	console.log(objPath);
+            	  	console.log(mtlPath);
             	  	var filePath = "/admin/resources/file/";
                     makeFurniture(filePath,objPath,mtlPath,0.1);
                     furniState = 1
                     setTimeout(function(){state = 7; console.log('complete');},1000);
                 };
-                
+                this.changeTexture1 = function()
+                {
+                	if(wallTexture == 1)
+                	{
+                		console.log(selectWall);
+                		wallTexture = THREE.ImageUtils.loadTexture(path+'/wallPaper1.jpg');
+                		var mats = [];
+                        mats.push(new THREE.MeshBasicMaterial({color: 0xdedede}));
+                        mats.push(new THREE.MeshBasicMaterial({color: 0xdedede}));
+                        mats.push(new THREE.MeshBasicMaterial({color: 0xa0a0a0}));
+                        mats.push(new THREE.MeshBasicMaterial({color: 0xdedede}));        
+                        mats.push(new THREE.MeshPhongMaterial({ map: wallTexture}));        
+                        mats.push(new THREE.MeshBasicMaterial({color: 0xcdcdcd}));
+                        
+                		selectWall.material = new THREE.MeshFaceMaterial(mats);
+                		//scene.add(selectWall);
+                		
+                	}
+                }
 	        };
         	
 	        camera.lookAt(scene.position);
@@ -1705,6 +2111,17 @@ canvas {
         
 			function render()
 			{
+				if(isScaled == 2)
+        		{
+					isScaled = 0;
+        			if(scaleValue < 1.0)
+        				scaleValue += 0.05
+        		}
+        		else if (isScaled == 1){
+					isScaled = 0;
+        			if(scaleValue > 0.01)
+        				scaleValue -= 0.05
+        		} 
 				//requestAnimationFrame(render);
 				renderer.render( scene, camera );
 			}
@@ -1829,10 +2246,10 @@ canvas {
 				objLoader.load( objPath, function ( object ) {
                         
                 object.scale.set(furniSize,furniSize,furniSize);
-                object.name ='funiture';
-                
+                object.name ='furniture';
+                //object.matrixAutoUpdate = false;
                 rollOverFurniture = object;
-                console.log(object);    
+                console.log("왜 안되니?");    
 				}, onProgress, onError);
                            
 				});
@@ -1860,8 +2277,6 @@ canvas {
             mats.push(new THREE.MeshPhongMaterial({ map: wallTexture}));  
             mats.push(new THREE.MeshPhongMaterial({ map: wallTexture}));        
             mats.push(new THREE.MeshPhongMaterial({ map: wallTexture})); 
-        
-            
             
             //wallMaterials = new THREE.MeshPhongMaterial({ map: wallTexture});
             
@@ -1888,7 +2303,7 @@ canvas {
                 floor.position.copy( intersect.point ).add( intersect.face.normal );            
 			    floor.position.divideScalar( 10 ).floor().multiplyScalar( 10 ).addScalar( 5 );
                 //floor.position.y = +100;
-                floor.name = 'plane';
+                floor.name = 'plane2';
 				scene.add( floor );				
 				objects.push( floor );
                 
@@ -2090,7 +2505,9 @@ canvas {
         
         function createFurni(intersect)
         {
-            scene.remove(rollOverFurniture);
+            //scene.remove(rollOverFurniture);
+            console.log(":::");
+            console.log(furnitureObj);
             scene.add(furnitureObj);
             objects.push(furnitureObj);    
             saveCurState(objects);
@@ -2141,7 +2558,7 @@ canvas {
     
 		} */
   		</script>
-  		
+
 	<!-- PRELOADER -->
 	<div id="loader" style="display: none;">
 		<div class="loader-container">
@@ -2170,15 +2587,13 @@ canvas {
 				<li class='has-sub'><a href='#'><i class="fa fa-3x fa-list"
 						aria-hidden="true" style="vertical-align: middle;"></i></a>
 					<ul>
-						<li><i class="fa fa-3x fa-list"
-						aria-hidden="true" style="vertical-align: middle;"></i>
-						
-						</li>
-						<li><i class="fa fa-3x fa-list"
-						aria-hidden="true" style="vertical-align: middle;"></i>
-						</li>
-					</ul>
-				</li>
+						<li><a href='#' onclick="UIcontrols.saveScene()"><i
+								class="fa fa-3x fa-list" aria-hidden="true"
+								style="vertical-align: middle;"></i></a></li>
+						<li><a href='#' onclick="UIcontrols.loadScene()"><i
+								class="fa fa-3x fa-list" aria-hidden="true"
+								style="vertical-align: middle;"></i></a></li>
+					</ul></li>
 				<li><a href='#' onclick="UIcontrols.unDo()"><i
 						class="fa fa-3x fa-undo" aria-hidden="true"
 						style="vertical-align: middle;"></i></a></li>
@@ -2188,13 +2603,14 @@ canvas {
 				<li><a href='#' onclick="UIcontrols.switchCamera()"><i
 						class="fa fa-3x fa-eye" aria-hidden="true"
 						style="vertical-align: middle;"></i></a></li>
-				<li><a href='#' onclick="UIcontrols.createTempleteBricks()"><i class="fa fa-3x fa-crop"
-						aria-hidden="true" style="vertical-align: middle;"></i></a></li>
+				<li><a href='#' onclick="UIcontrols.createTempleteBricks()"><i
+						class="fa fa-3x fa-crop" aria-hidden="true"
+						style="vertical-align: middle;"></i></a></li>
 				<li><a href='#' onclick="UIcontrols.createBricks()"><i
 						class="fa fa-3x fa-cubes" aria-hidden="true"
 						style="vertical-align: middle;"></i></a></li>
-				<li><a onclick="UIcontrols.captureIMG()"><i class="fa fa-3x fa-camera-retro"
-						style="vertical-align: middle;"></i></a></li>
+				<li><a onclick="UIcontrols.captureIMG()"><i
+						class="fa fa-3x fa-camera-retro" style="vertical-align: middle;"></i></a></li>
 				<!-- <li class='active has-sub'><a onclick=""><i
 						class="fa fa-3x fa-camera" style="vertical-align: middle;"></i></a>
 					<ul>
@@ -2226,84 +2642,95 @@ canvas {
 
 		<!-- 			세로툴박스 -->
 
+<!-- aaaa -->
 		<div id='cssmenuVertic'>
 			<ul>
-				<li><a href='#'><i class="fa fa-3x fa-search" style="vertical-align: middle;"></i></a></li>
-				<li class='active has-sub' onmouseenter="UIcontrols.getFurnitureList()" ><a href='#'><i class="fa fa-3x fa-archive" style="vertical-align: middle;"></i></a>
+				<li><a href='#'><i class="fa fa-3x fa-search"
+						style="vertical-align: middle;"></i></a></li>
+				<li class='active has-sub'><a href='#'><i
+						class="fa fa-3x fa-archive" style="vertical-align: middle;"></i></a>
+					<ul style="width: 100px;">
+						<li class='has-sub' onmouseenter="UIcontrols.getFurnitureList()"><a
+							href='#' style="font-size: 15px;">ALL</a>
+							<ul
+								style="width: min-content; overflow: auto; height: 400px; top: -50px; box-shadow: 0 0 50px rgba(0, 0, 0, 0.65); padding: 10px; background: rgba(87, 87, 87, 0.8);">
+								<table class='furniList'>
+								</table>
+							</ul></li>
+						<li class='has-sub' onmouseenter="UIcontrols.getTableList()"><a
+							href='#' style="font-size: 15px;">Table</a>
+							<ul
+								style="width: min-content; overflow: auto; height: 400px; top: -50px; box-shadow: 0 0 50px rgba(0, 0, 0, 0.65); padding: 10px; background: rgba(87, 87, 87, 0.8);">
+								<table class='tableList'>
+								</table>
+							</ul></li>
+						<li class='has-sub' onmouseenter="UIcontrols.getChairList()"><a
+							href='#' style="font-size: 15px;">Chair</a>
+							<ul
+								style="width: min-content; overflow: auto; height: 400px; top: -50px; box-shadow: 0 0 50px rgba(0, 0, 0, 0.65); padding: 10px; background: rgba(87, 87, 87, 0.8);">
+								<table class='chairList'>
+								</table>
+							</ul></li>
+						<li class='has-sub' onmouseenter="UIcontrols.getSofaList()"><a
+							href='#' style="font-size: 15px;">Sofa</a>
+							<ul
+								style="width: min-content; overflow: auto; height: 400px; top: -50px; box-shadow: 0 0 50px rgba(0, 0, 0, 0.65); padding: 10px; background: rgba(87, 87, 87, 0.8);">
+								<table class='sofaList'>
+								</table>
+							</ul></li>
+						<li class='has-sub' onmouseenter="UIcontrols.getBedList()"><a
+							href='#' style="font-size: 15px;">Bed</a>
+							<ul
+								style="width: min-content; overflow: auto; height: 400px; top: -50px; box-shadow: 0 0 50px rgba(0, 0, 0, 0.65); padding: 10px; background: rgba(87, 87, 87, 0.8);">
+								<table class='bedList'>
+								</table>
+							</ul></li>
+						<li class='has-sub' onmouseenter="UIcontrols.getClosetList()"><a
+							href='#' style="font-size: 15px;">Closet</a>
+							<ul
+								style="width: min-content; overflow: auto; height: 400px; top: -50px; box-shadow: 0 0 50px rgba(0, 0, 0, 0.65); padding: 10px; background: rgba(87, 87, 87, 0.8);">
+								<table class='closetList'>
+								</table>
+							</ul></li>
+						<li class='has-sub' onmouseenter="UIcontrols.getOthersList()"><a
+							href='#' style="font-size: 15px;">Others</a>
+							<ul
+								style="width: min-content; overflow: auto; height: 400px; top: -50px; box-shadow: 0 0 50px rgba(0, 0, 0, 0.65); padding: 10px; background: rgba(87, 87, 87, 0.8);">
+								<table class='othersList'>
+								</table>
+							</ul></li>
+
+					</ul></li>
+				<li><a href='#'><i class="fa fa-3x fa-delicious"
+						style="vertical-align: middle;"></i></a>
 					<ul>
-						<table class='furniList'>
-						</table>
+						<li class='has-sub'><a href='#'
+							onclick="UIcontrols.changeTexture1()"><i
+								class="fa fa-3x fa-th-large" style="vertical-align: middle;"></i></a>
+						<li><a href='#'><i class="fa fa-3x fa-camera-retro"
+								style="vertical-align: middle;"></i></a></li>
+						<li class='last'><a href='#'><i
+								class="fa fa-3x fa-camera-retro" style="vertical-align: middle;"></i></a></li>
+						<li class='has-sub'><a href='#'><i
+								class="fa fa-3x fa-camera-retro" style="vertical-align: middle;">
+							</i></a> <!-- <ul> -->
+						<li><a href='#'><i class="fa fa-3x fa-camera-retro"
+								style="vertical-align: middle;"></i></a></li>
+						<li class='last'><a href='#'><i
+								class="fa fa-3x fa-camera-retro" style="vertical-align: middle;"></i></a></li>
 					</ul>
-					</li>
-				<li><a href='#'><i class="fa fa-3x fa-delicious" style="vertical-align: middle;"></i></a>
-				<ul>
-						<li class='has-sub'><a href='#'><i class="fa fa-3x fa-th-large" style="vertical-align: middle;"></i></a>
-						<li><a href='#'><i class="fa fa-3x fa-camera-retro"	style="vertical-align: middle;"></i></a></li>
-						<li class='last'><a href='#'><i class="fa fa-3x fa-camera-retro" style="vertical-align: middle;"></i></a></li>							
-						<li class='has-sub'><a href='#'><i class="fa fa-3x fa-camera-retro" style="vertical-align: middle;">
-						</i></a>
-							<!-- <ul> -->
-								<li><a href='#'><i class="fa fa-3x fa-camera-retro" style="vertical-align: middle;"></i></a></li>
-								<li class='last'><a href='#'><i class="fa fa-3x fa-camera-retro" style="vertical-align: middle;"></i></a></li>
-							<!-- </ul> --></li>
-					</ul>
-				</li>
-				<li class='last'><a href='#' onclick="UIcontrols.changeGrid()"><i class="fa fa-3x fa-th" style="vertical-align: middle;"></i></a></li>
+						<!-- </ul> --></li>
+			<li class='last'><a href='#' onclick="UIcontrols.changeGrid()"><i
+					class="fa fa-3x fa-th" style="vertical-align: middle;"></i></a></li>
 			</ul>
 		</div>
 
 		<!-- end section -->
 
-
-
-		<!-- 		<div class="topfooter"> -->
-		<!-- 			<div class="container"> -->
-		<!-- 				<div class="row"> -->
-		<!-- 					<div class="col-md-4 col-sm-4 col-xs-12"> -->
-		<!-- 						<a class="navbar-brand" href="index.html"><img -->
-		<!-- 							src="/admin/resources/images/logo.png" alt=""></a> -->
-		<!-- 					</div> -->
-		<!-- 					end col -->
-
-		<!-- 					<div class="col-md-4 col-sm-4 col-xs-12 text-center payments"> -->
-		<!-- 						<a href="#"><i class="fa fa-paypal"></i></a> <a href="#"><i -->
-		<!-- 							class="fa fa-credit-card"></i></a> <a href="#"><i -->
-		<!-- 							class="fa fa-cc-amex"></i></a> <a href="#"><i -->
-		<!-- 							class="fa fa-cc-mastercard"></i></a> <a href="#"><i -->
-		<!-- 							class="fa fa-cc-visa"></i></a> <a href="#"><i -->
-		<!-- 							class="fa fa-cc-diners-club"></i></a> <a href="#"><i -->
-		<!-- 							class="fa fa-cc-discover"></i></a> -->
-		<!-- 					</div> -->
-		<!-- 					end col -->
-
-		<!-- 					<div class="col-md-4 col-sm-4 col-xs-12 text-right"> -->
-		<!-- 						<ul class="list-inline"> -->
-		<!-- 							<li><a href="#">Home</a></li> -->
-		<!-- 							<li><a href="#">Terms of Usage</a></li> -->
-		<!-- 							<li><a href="#">Contact</a></li> -->
-		<!-- 							<li><a class="topbutton" href="#" style="bottom: -100px;">Back -->
-		<!-- 									<i class="fa fa-angle-up"></i> -->
-		<!-- 							</a></li> -->
-		<!-- 						</ul> -->
-		<!-- 					</div> -->
-		<!-- 					end col -->
-		<!-- 				</div> -->
-		<!-- 				end row -->
-		<!-- 			</div> -->
-		<!-- 			<!-- end container -->
-		<!-- 		</div> -->
-		<!-- end section -->
-
 	</div>
 
-		<script>
-		/* function pageProc(currentPage, libraryCondition, libraryKeyword){
-		
-		var session = '${sessionScope.coName}'
-		
-		location.href = "/admin/file/library?coNAME="+session +"&currentPage="+currentPage + "&libraryCondition="+libraryCondition + "&libraryKeyword="+libraryKeyword;
-		
-		} */
+	<script>
+	
 		</script>
 
 	<!-- Main Scripts-->

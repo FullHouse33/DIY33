@@ -37,7 +37,7 @@
 	<!-- 기업 회원 목록, 검색, 정렬  -->
 	<select id="companyList" parameterType="map" resultType="CompanyVO">
 		SELECT * FROM ITR_COMPANY 
-			<if test="companyId != 'admin'">
+			<if test="coId != 'admin'">
 				<if test="companyCondition == 'companyId'">
 					WHERE coid LIKE '%'||#{companyKeyword}||'%'
 				</if>
@@ -52,7 +52,7 @@
 	<!-- 페이징_기업 -->
 	<select id="companyPaging" parameterType="map" resultType="int">
 		SELECT COUNT(*) FROM ITR_COMPANY 
-			<if test="companyId != 'admin'">
+			<if test="coId != 'admin'">
 				<if test="companyCondition == 'companyId'">
 					WHERE coid LIKE '%'||#{companyKeyword}||'%'
 				</if>
@@ -66,12 +66,12 @@
 	</select>
 	<!-- 기업 회원 승인 -->
 	<update id="setAuthority" parameterType="CompanyVO">
-		UPDATE ITR_COMPANY SET COAUTHORITY = '1' WHERE COID = #{companyId}
+		UPDATE ITR_COMPANY SET COAUTHORITY = '1' WHERE COID = #{coId}
 	</update>
 	
 	<!-- 기업 회원 승인  철회-->
 	<update id="setAuthorityRemove" parameterType="CompanyVO">
-		UPDATE ITR_COMPANY SET COAUTHORITY = '0' WHERE COID = #{companyId}
+		UPDATE ITR_COMPANY SET COAUTHORITY = '0' WHERE COID = #{coId}
 	</update>
 	<!-- <update id="setAuthority" parameterType="CompanyVO">
 		UPDATE ITR_COMPANY
@@ -128,8 +128,8 @@
 		INSERT INTO ITR_COMPANY
 		VALUES (
 		#{coName},
-		#{companyId},
-		#{companyPwd},
+		#{coId},
+		#{coPwd},
 		#{coTel},
 		#{coManagerName},
 		#{coManagerDept},
@@ -139,20 +139,20 @@
 	<!-- 로그인 -->
 	<select id="loginCompany" parameterType="CompanyVO" resultType="CompanyVO">
 		SELECT * FROM ITR_COMPANY
-		WHERE COID = #{companyId}
-		<if test="companyPwd != null">	
-		AND COPWD = #{companyPwd}
+		WHERE COID = #{coId}
+		<if test="coPwd != null">	
+		AND COPWD = #{coPwd}
 		</if>
 	</select>
 	<!-- 회원 정보 수정 -->
 	<update id="modifyCompany" parameterType="CompanyVO">
 		UPDATE ITR_COMPANY SET
-		COPWD = #{companyPwd},
+		COPWD = #{coPwd},
 		COTEL = #{coTel},
 		COMANAGERNAME = #{coManagerName},
 		COMANAGERDEPT = #{coManagerDept},
 		COMANAGEREMAIL = #{coManagerEmail}
-		WHERE COID = #{companyId}
+		WHERE COID = #{coId}
 	</update>
 	<!-- 기업 회원 id찾기 -->
 	<select id="searchCompanyId" parameterType="CompanyVO" resultType="CompanyVO">
@@ -160,7 +160,7 @@
 	</select>
 	<!-- 기업 회원 pwd찾기 -->
 	<select id="companyPwd" parameterType="CompanyVO" resultType="CompanyVO">
-		SELECT * FROM ITR_COMPANY WHERE COID=#{companyId} and COMANAGEREMAIL = #{coManagerEmail}  
+		SELECT * FROM ITR_COMPANY WHERE COID=#{coId} and COMANAGEREMAIL = #{coManagerEmail}  
 	</select>
 	
 	<!-- ///////////////////공통/////////////////// -->
@@ -170,7 +170,7 @@
 	</select>
 	<!-- 기업 회원 열람 -->
 	<select id="companyRead" parameterType="CompanyVO" resultType="CompanyVO">
-		SELECT * FROM ITR_COMPANY WHERE COID = #{companyId}
+		SELECT * FROM ITR_COMPANY WHERE COID = #{coId}
 	</select>
 	<!-- 일반 회원 삭제 -->
 	<delete id="userDelete" parameterType="UserVO">
@@ -178,7 +178,7 @@
 	</delete>
 	<!-- 기업 회원 삭제 -->
 	<delete id="companyDelete" parameterType="CompanyVO">
-		DELETE FROM ITR_COMPANY WHERE COID = #{companyId}
+		DELETE FROM ITR_COMPANY WHERE COID = #{coId}
 	</delete>
 	
 </mapper>

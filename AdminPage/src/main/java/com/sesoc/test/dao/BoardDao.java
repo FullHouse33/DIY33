@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.sesoc.test.vo.GalleryVO;
+import com.sesoc.test.vo.ImgVO;
 import com.sesoc.test.vo.ReplyVO;
+import com.sesoc.test.vo.UserVO;
 
 public interface BoardDao {
 
@@ -40,5 +42,7 @@ public interface BoardDao {
 	
 	//댓글 수
 	public int countReply(int galleryNum);
+
+	public ArrayList<ImgVO> getUserImg(UserVO userVO);
 
 }

@@ -177,12 +177,12 @@
 														type="text" class="form-control input-lg" id="coName"
 														name="coName" placeholder="Company Name"
 														style="margin-bottom: 10px;"> <input type="text"
-														class="form-control input-lg" id="companyId" name="companyId"
+														class="form-control input-lg" id="coId" name="coId"
 														placeholder="Id" style="margin-bottom: 10px;"><span
 														id="checkId"
 														style="float: right; margin-bottom: 10px; font-size: 12px;"></span>
 														<input type="password" class="form-control input-lg"
-														id="companyPwd" name="companyPwd" placeholder="Password"
+														id="coPwd" name="coPwd" placeholder="Password"
 														style="margin-bottom: 10px;"><span id="checkpwd"
 														style="float: right; margin-bottom: 10px; font-size: 12px;"></span>
 														<input type="tel" class="form-control input-lg" id="coTel"
@@ -286,10 +286,10 @@
 	<script>
 		$(function(){
 			//아이디 체크......
-			$("#companyId").on('keyup', function(){
-				var companyId = $("#companyId").val();
+			$("#coId").on('keyup', function(){
+				var coId = $("#coId").val();
 		
-				if(companyId.length < 5 || companyId.length > 20 ){
+				if(coId.length < 5 || coId.length > 20 ){
 					$("#checkId").css("color", "red");
 					$("#checkId").text("아이디는 5~20자 이내");
 					return false;
@@ -297,7 +297,7 @@
 					$.ajax({
 						url: "/admin/user/coIdCheck",
 						type:"post",
-						data:{"companyId":companyId},
+						data:{"coId":coId},
 						success:function(result){ // true가 리턴되면 사용가능한 아이디
 							if(!result){
 								$("#checkId").css("color", "blue");
@@ -313,8 +313,8 @@
 				} 
 			}); 
 			//비밀번호 체크
-			$("#companyPwd").on('keyup', function(){
-				var pwd = $("#companyPwd").val();
+			$("#coPwd").on('keyup', function(){
+				var pwd = $("#coPwd").val();
 		
 				var reg_pwd = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;//정규식 표현 선언
 				
@@ -331,8 +331,8 @@
 			//유효성 검사
 			$("#joinCompany").click(function(){
 				var coName = $("#coName");
-				var coId = $("#companyId");
-				var coPwd = $("#companyPwd");
+				var coId = $("#coId");
+				var coPwd = $("#coPwd");
 				var coTel = $("#coTel");
 				var coManagerName = $("#coManagerName");
 				var coManagerDept = $("#coManagerDept");

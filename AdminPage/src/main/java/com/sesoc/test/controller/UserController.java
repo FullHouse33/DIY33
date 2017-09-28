@@ -2,6 +2,7 @@ package com.sesoc.test.controller;
 
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -116,8 +117,9 @@ public class UserController {
 	//로그인
 	@RequestMapping(value="loginUser", method = RequestMethod.GET)
 	public String loginUser(UserVO user, HttpSession session, Model model) {
+		System.out.println(user.toString());
 		UserVO result = service.loginUser(user);
-		
+		System.out.println(result.toString());
 		if(result != null){
 			session.setAttribute("id", result.getId());
 			session.setAttribute("pwd", result.getPwd());
@@ -157,7 +159,8 @@ public class UserController {
 	
 	//회원 정보 수정
 	@RequestMapping(value = "userUpdateForm", method = RequestMethod.GET)
-	public String userUpdateForm(String id, Model model) {
+	public String userUpdateForm(String id, Model model, HttpSession session) {
+		id = (String) session.getAttribute("id");
 		model.addAttribute("userRead", service.userRead(id));
 		return "/User/userUpdate";
 	}
@@ -190,9 +193,9 @@ public class UserController {
 		CompanyVO result = service.loginCompany(company);
 		
 		if(result != null){
-			session.setAttribute("CoId", result.getCompanyId());
+			session.setAttribute("CoId", result.getCoId());
 			session.setAttribute("coName", result.getCoName());
-			session.setAttribute("coPwd", result.getCompanyPwd());
+			session.setAttribute("coPwd", result.getCoPwd());
 			session.setAttribute("coAuth", result.getCoAuthority());
 		}
 		

@@ -25,4 +25,15 @@ public interface FileDao {
 
 	public void uploadImg(ImgVO imgVO);//img 파일 업로드 테스트용
 
+	public ArrayList<FurnitureVO> getTableList();
+
+	public ArrayList<FurnitureVO> getChairList();
+
+	public ArrayList<FurnitureVO> getSofaList();
+
+	public ArrayList<FurnitureVO> getBedList();
+
+	public ArrayList<FurnitureVO> getClosetList();
+
+	public ArrayList<FurnitureVO> getOthersList();
 }

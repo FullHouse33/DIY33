@@ -25,8 +25,8 @@
 
 		$("#coLogin").click(
 				function() {
-					var coId = $('input[name=coId]').val();
-					var coPwd = $('input[name=coPwd]').val();
+					var coId = $('input[name=companyId]').val();
+					var coPwd = $('input[name=companyPwd]').val();
 
 					if (coId.length < 1) {
 						alert("아이디를 입력하세요!");
@@ -141,10 +141,10 @@
 												style="table-layout: unset; word-break: unset;">
 												<tbody style="text-align: center;">
 													<tr class="row">
-														<td class="col-md-3"><input type="text" name="coId"
-															id="coId" class="form-control input-lg"
+														<td class="col-md-3"><input type="text" name="companyId"
+															id="companyId" class="form-control input-lg"
 															placeholder="COMPANY ID" style="margin-bottom: 10px;">
-															<input type="password" name="coPwd" id="coPwd"
+															<input type="password" name="companyPwd" id="companyPwd"
 															class="form-control input-lg" placeholder="PW"></td>
 													</tr>
 												</tbody>

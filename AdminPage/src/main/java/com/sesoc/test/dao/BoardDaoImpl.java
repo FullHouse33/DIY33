@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sesoc.test.vo.GalleryVO;
+import com.sesoc.test.vo.ImgVO;
 import com.sesoc.test.vo.ReplyVO;
+import com.sesoc.test.vo.UserVO;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -94,6 +96,12 @@ public class BoardDaoImpl implements BoardDao {
 	public int countReply(int galleryNum) {
 		BoardMapper mapper = sqlsession.getMapper(BoardMapper.class);
 		return mapper.countReply(galleryNum);
+	}
+	
+	@Override
+	public ArrayList<ImgVO> getUserImg(UserVO userVO) {
+		BoardMapper mapper = sqlsession.getMapper(BoardMapper.class);
+		return mapper.getUserImg(userVO);
 	}
 
 }

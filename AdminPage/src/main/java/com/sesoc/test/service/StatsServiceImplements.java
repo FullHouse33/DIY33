@@ -30,8 +30,8 @@ public class StatsServiceImplements implements StatsService{
 			for (int i = 0; i < 9; i++) {
 				vo.add(i, list.get(i));
 			}
+			model.addAttribute("rank",vo);     
 		}
-		model.addAttribute("rank",vo);     
 	}
 	
 	//관리자가 전체, 기업별 좋아요 순으로 목록 조회
@@ -53,12 +53,14 @@ public class StatsServiceImplements implements StatsService{
 	
 		ArrayList<RankVO> vo=dao.genFurnitureList(user);
 		ArrayList<RankVO> img = new ArrayList<>();
-		for(int i=0;i<3;i++){
-			img.add(vo.get(i));
+		if (vo.size() != 0) {
+			for(int i=0;i<3;i++){
+				img.add(vo.get(i));
+			}
+			model.addAttribute("genList", img);
 		}
 		
-		model.addAttribute("genList", img);
-		}
+	}
 
 	
 	@Override

@@ -115,11 +115,13 @@
 		INSERT INTO ITR_GALLERY VALUES ( 
 			GALLERYNUM_SEQ.NEXTVAL, 
 			#{id}, 
-			#{imgUuid}, 
+			#{imgUuid3}, 
 			#{title}, 
 			#{content}, 
 			sysdate, 
-			#{hit}
+			#{hit},
+			#{imgUuid1}, 
+			#{imgUuid2} 
 		) 
 	</insert>
 
@@ -163,5 +165,10 @@
 	<delete id="deleteReply" parameterType="int">
 		delete ITR_REPLY where replyNum = #{replyNum}
 	</delete>
+	
+	<!-- 	유저의 이미지 리스트 -->
+	<select id="getUserImg" parameterType="UserVO" resultType="ImgVO">
+		select * from itr_img where ID = #{id}
+	</select>
 	
 </mapper>

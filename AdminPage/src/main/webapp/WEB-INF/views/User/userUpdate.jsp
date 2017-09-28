@@ -53,11 +53,13 @@
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 <script>
-    table {
-    table-layout: fixed;
-    word-wrap: break-word;
-}
 </script>
+<style type="text/css">
+/* table { */
+/*     table-layout: fixed; */
+/*     word-wrap: break-word; */
+}
+</style>
 </head>
 <body data-brackets-id="23359" style="overflow: visible;">
 	

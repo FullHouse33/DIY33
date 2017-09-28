@@ -170,14 +170,13 @@
         </div><!-- end first slider -->
 
             		<c:if test="${sessionScope.id != null && sessionScope.id != 'admin'}">
+			                <c:if test="${genList != null}">
 			<section class="section">
 	            <div class="container">
 		                <div class="section-title text-center clearfix">
-		                    <h4>나에게 맞는 추천 가구 Top5</h4>
-		                    <hr>
+		                    <h4>나에게 맞는 추천 가구 Top5</h4><hr>
 		                </div><!-- end title -->
 		                <div class="banner-masonry row">
-			                <c:if test="${genList != null}">
 								<c:forEach items="${genList}" var="gen">
 				                    <div class="banner-item item-w1 item-h1">
 				                        <a href="#"><img src="/admin/resources/file/${gen.imgPath}" alt="" class="img-responsive"></a>
@@ -186,10 +185,10 @@
 				                        </div> -->
 				                    </div><!-- end banner-item -->
 								</c:forEach>
-			                </c:if>
 		                </div><!-- end banner -->
 	            </div><!-- end container -->
 	        </section><!-- end section -->
+			                </c:if>
 					</c:if>
 		
         <section class="section">

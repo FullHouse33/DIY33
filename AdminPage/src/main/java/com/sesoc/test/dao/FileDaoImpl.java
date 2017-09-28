@@ -76,5 +76,40 @@ public class FileDaoImpl implements FileDao {
 		FileMapper mapper = sqlsession.getMapper(FileMapper.class);
 		mapper.uploadImg(imgVO);
 	}
+	
+	@Override
+	public ArrayList<FurnitureVO> getTableList() {
+		FileMapper mapper = sqlsession.getMapper(FileMapper.class);
+		return mapper.getTableList();
+	}
 
+	@Override
+	public ArrayList<FurnitureVO> getChairList() {
+		FileMapper mapper = sqlsession.getMapper(FileMapper.class);
+		return mapper.getChairList();
+	}
+
+	@Override
+	public ArrayList<FurnitureVO> getSofaList() {
+		FileMapper mapper = sqlsession.getMapper(FileMapper.class);
+		return mapper.getSofaList();
+	}
+
+	@Override
+	public ArrayList<FurnitureVO> getBedList() {
+		FileMapper mapper = sqlsession.getMapper(FileMapper.class);
+		return mapper.getBedList();
+	}
+
+	@Override
+	public ArrayList<FurnitureVO> getClosetList() {
+		FileMapper mapper = sqlsession.getMapper(FileMapper.class);
+		return mapper.getClosetList();
+	}
+
+	@Override
+	public ArrayList<FurnitureVO> getOthersList() {
+		FileMapper mapper = sqlsession.getMapper(FileMapper.class);
+		return mapper.getOthersList();
+	}
 }

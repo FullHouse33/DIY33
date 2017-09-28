@@ -107,4 +107,34 @@
 		INSERT INTO ITR_IMG VALUES (#{imgUuid}, #{id}, sysdate)
 	</insert>
 
+	<!-- 가구리스트 호출 (작업창)-->
+	<select id="getTableList" parameterType="FurnitureVO" resultType="FurnitureVO">
+		SELECT * FROM ITR_FURNITURE where type = 'Table' 
+	</select>
+	
+	<!-- 가구리스트 호출 (작업창)-->
+	<select id="getChairList" parameterType="FurnitureVO" resultType="FurnitureVO">
+		SELECT * FROM ITR_FURNITURE where type = 'Chair'  
+	</select>
+	
+	<!-- 가구리스트 호출 (작업창)-->
+	<select id="getSofaList" parameterType="FurnitureVO" resultType="FurnitureVO">
+		SELECT * FROM ITR_FURNITURE where type = 'Sofa'
+	</select>
+	
+	<!-- 가구리스트 호출 (작업창)-->
+	<select id="getBedList" parameterType="FurnitureVO" resultType="FurnitureVO">
+		SELECT * FROM ITR_FURNITURE where type = 'Bed'
+	</select>
+	
+	<!-- 가구리스트 호출 (작업창)-->
+	<select id="getClosetList" parameterType="FurnitureVO" resultType="FurnitureVO">
+		SELECT * FROM ITR_FURNITURE where type = 'Closet'
+	</select>
+	
+	<!-- 가구리스트 호출 (작업창)-->
+	<select id="getOthersList" parameterType="FurnitureVO" resultType="FurnitureVO">
+		SELECT * FROM ITR_FURNITURE where type = 'Others'
+	</select>
+	
 </mapper>

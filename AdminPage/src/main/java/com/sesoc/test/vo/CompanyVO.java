@@ -12,10 +12,10 @@ public class CompanyVO {
 	private String coName;
 
 	/** COMPANY 아이디. */
-	private String companyId;
+	private String coId;
 
 	/** COMPANY 비밀번호. */
-	private String companyPwd;
+	private String coPwd;
 
 	/** COMPANY 전화번호. */
 	private String coTel;
@@ -32,14 +32,24 @@ public class CompanyVO {
 	/** COMPANY 승인여부. */
 	private int coAuthority;
 
-	public CompanyVO() {}
+	@Override
+	public String toString() {
+		return "CompanyVO [coName=" + coName + ", coId=" + coId + ", coPwd=" + coPwd + ", coTel=" + coTel
+				+ ", coManagerName=" + coManagerName + ", coManagerDept=" + coManagerDept + ", coManagerEmail="
+				+ coManagerEmail + ", coAuthority=" + coAuthority + "]";
+	}
 
-	public CompanyVO(String coName, String companyId, String companyPwd, String coTel, String coManagerName,
-			String coManagerDept, String coManagerEmail, int coAuthority) {
+	public CompanyVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public CompanyVO(String coName, String coId, String coPwd, String coTel, String coManagerName, String coManagerDept,
+			String coManagerEmail, int coAuthority) {
 		super();
 		this.coName = coName;
-		this.companyId = companyId;
-		this.companyPwd = companyPwd;
+		this.coId = coId;
+		this.coPwd = coPwd;
 		this.coTel = coTel;
 		this.coManagerName = coManagerName;
 		this.coManagerDept = coManagerDept;
@@ -55,20 +65,20 @@ public class CompanyVO {
 		this.coName = coName;
 	}
 
-	public String getCompanyId() {
-		return companyId;
+	public String getCoId() {
+		return coId;
 	}
 
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setCoId(String coId) {
+		this.coId = coId;
 	}
 
-	public String getCompanyPwd() {
-		return companyPwd;
+	public String getCoPwd() {
+		return coPwd;
 	}
 
-	public void setCompanyPwd(String companyPwd) {
-		this.companyPwd = companyPwd;
+	public void setCoPwd(String coPwd) {
+		this.coPwd = coPwd;
 	}
 
 	public String getCoTel() {
@@ -111,19 +121,6 @@ public class CompanyVO {
 		this.coAuthority = coAuthority;
 	}
 
-	@Override
-	public String toString() {
-		return "CompanyVO [coName=" + coName + ", companyId=" + companyId + ", companyPwd=" + companyPwd + ", coTel="
-				+ coTel + ", coManagerName=" + coManagerName + ", coManagerDept=" + coManagerDept + ", coManagerEmail="
-				+ coManagerEmail + ", coAuthority=" + coAuthority + "]";
-	}
-	
-	
-	
-	
-	
-	
-	
 }
 	
 	

@@ -187,4 +187,35 @@ public class FileServiceImpl implements FileService{
 	public void uploadImg(ImgVO imgVO) {
 		dao.uploadImg(imgVO);
 	}
+	
+	@Override
+	public ArrayList<FurnitureVO> getTableList() {
+		return dao.getTableList();
+	}
+
+	@Override
+	public ArrayList<FurnitureVO> getChairList() {
+		return dao.getChairList();
+	}
+
+	@Override
+	public ArrayList<FurnitureVO> getSofaList() {
+		return dao.getSofaList();
+	}
+
+	@Override
+	public ArrayList<FurnitureVO> getBedList() {
+		return dao.getBedList();
+	}
+
+	@Override
+	public ArrayList<FurnitureVO> getClosetList() {
+		return dao.getClosetList();
+	}
+
+	@Override
+	public ArrayList<FurnitureVO> getOthersList() {
+		return dao.getOthersList();
+	}
+	
 }

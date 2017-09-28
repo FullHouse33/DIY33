@@ -15,7 +15,11 @@ public class GalleryVO {
 	private String id;
 
 	/** IMG 서버에 저장되는 파일명. */
-	private String imgUuid;
+	private String imgUuid1;
+	
+	private String imgUuid2;
+
+	private String imgUuid3;
 
 	/** GALLERY 제목. */
 	private String title;
@@ -29,14 +33,25 @@ public class GalleryVO {
 	/** GALLERY 조회수. */
 	private int hit;
 
-	public GalleryVO() {}
+	@Override
+	public String toString() {
+		return "GalleryVO [galleryNum=" + galleryNum + ", id=" + id + ", imgUuid1=" + imgUuid1 + ", imgUuid2="
+				+ imgUuid2 + ", imgUuid3=" + imgUuid3 + ", title=" + title + ", content=" + content + ", inputdate="
+				+ inputdate + ", hit=" + hit + "]";
+	}
 
-	public GalleryVO(int galleryNum, String id, String imgUuid, String title, String content, String inputdate,
-			int hit) {
+	public GalleryVO() {
+		super();
+	}
+
+	public GalleryVO(int galleryNum, String id, String imgUuid1, String imgUuid2, String imgUuid3, String title,
+			String content, String inputdate, int hit) {
 		super();
 		this.galleryNum = galleryNum;
 		this.id = id;
-		this.imgUuid = imgUuid;
+		this.imgUuid1 = imgUuid1;
+		this.imgUuid2 = imgUuid2;
+		this.imgUuid3 = imgUuid3;
 		this.title = title;
 		this.content = content;
 		this.inputdate = inputdate;
@@ -59,12 +74,28 @@ public class GalleryVO {
 		this.id = id;
 	}
 
-	public String getImgUuid() {
-		return imgUuid;
+	public String getImgUuid1() {
+		return imgUuid1;
 	}
 
-	public void setImgUuid(String imgUuid) {
-		this.imgUuid = imgUuid;
+	public void setImgUuid1(String imgUuid1) {
+		this.imgUuid1 = imgUuid1;
+	}
+
+	public String getImgUuid2() {
+		return imgUuid2;
+	}
+
+	public void setImgUuid2(String imgUuid2) {
+		this.imgUuid2 = imgUuid2;
+	}
+
+	public String getImgUuid3() {
+		return imgUuid3;
+	}
+
+	public void setImgUuid3(String imgUuid3) {
+		this.imgUuid3 = imgUuid3;
 	}
 
 	public String getTitle() {
@@ -98,4 +129,6 @@ public class GalleryVO {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
+
+	
 }
