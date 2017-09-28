@@ -18,7 +18,7 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- SITE META -->
-<title>Statistics</title>
+<title>HomeStyle | Responsive Furniture Website Template</title>
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="keywords" content="">
@@ -71,8 +71,6 @@
 </head>
 
 <body style="overflow: visible;">
-
-
 
 	<div id="wrapper">
 		<header class="header affix-top">
@@ -189,52 +187,41 @@
 							<!-- end row -->
 						</div>
 						<!-- end step 1 -->
+					
+				
 				
 				<div class="tab-style-1">
                      <div class="tabbed-widget">
                         <ul class="nav nav-tabs">
                            <li class="active"><a data-toggle="tab" href="#userTab"
                               aria-expanded="true">전체</a></li>
+                           <li class=""><a data-toggle="tab" href="#companyTab"
+                              aria-expanded="false">성별+연령</a></li>
                         </ul>
                         
+                        
+						
                         <div class="tab-content">
                               <c:if test="${sessionScope.CoId==null}">  
+                        
   								 <div id="userTab" class="tab-pane fade active in">
-  								 	<div class="sel sel--black-panther" onclick="change()" id="ddd"
+  								 	<div class="sel sel--black-panther" onclick="change();" id="ddd"
                              		 style="margin: unset; width: 150px; border: 1px solid #ededed; vertical-align: middle; font-size: 10px; height: 45px;">
                              
-	                             <select name="selectStat" id="selectStat"
-	                                 style="display: none;">
-	                                 <option>회사 선택</option>
-	                                 <option value="all">ALL</option>
-	                                 <option value="ikea">Ikea</option>
-	                                 <option value="casamia">Casamia</option>
-	                                 <option value="hanssem">Hanssem</option>
-	                             </select>
+                              <select name="selectStat" id="selectStat"
+                                 style="display: none;">
+                                 <option>통계</option>
+                                 <option value="all">ALL</option>
+                                 <option value="ikea">Ikea</option>
+                                 <option value="casamia">Casamia</option>
+                                 <option value="hanssem">Hanssem</option>
+                              </select>
 
-                       			</div>
-									<table class="table"
-										style="table-layout: fixed; word-break: break-all; letter-spacing: 2px;">
-										<thead>
-											<tr>
-												<th style="WIDTH: 12%;">Pick</th>
-												<th style="WIDTH: 25%;">Furniture Num</th>
-												<th style="WIDTH: 25%;">Furniture Name</th>
-												<th style="WIDTH: 15%;">Type</th>
-												<th style="WIDTH: 15%;">Color</th>
-											</tr>
-										</thead>
-										<tbody class="abc_list">
-										</tbody>
-									</table>
-								</div>
-                              </c:if>
-	
- 							  <c:if test="${sessionScope.CoId!=null}"> 
-  								 <div id="userTab" class="tab-pane fade active in">
-  								 <h1>${sessionScope.CoId}</h1>
-  								 	<table class="table"
-										style="table-layout: fixed; word-break: break-all; letter-spacing: 2px;">
+                           </div>
+								<table class="table"
+									style="table-layout: fixed; word-break: break-all; letter-spacing: 2px;">
+									
+									
 									<thead>
 										<tr>
 											<th style="WIDTH: 12%;">Pick</th>
@@ -245,6 +232,30 @@
 										</tr>
 									</thead>
 									<tbody class="abc_list">
+								
+										
+									</tbody>
+								</table>
+								</div>
+                              </c:if>
+	
+  								  <c:if test="${sessionScope.CoId!=null}"> 
+  								 <div id="userTab" class="tab-pane fade active in">
+  								 <h1>${sessionScope.CoId}</h1>
+  								 	<table class="table"
+										style="table-layout: fixed; word-break: break-all; letter-spacing: 2px;">
+									
+									<thead>
+										<tr>
+											<th style="WIDTH: 12%;">Pick</th>
+											<th style="WIDTH: 25%;">Furniture Num</th>
+											<th style="WIDTH: 25%;">Furniture Name</th>
+											<th style="WIDTH: 15%;">Type</th>
+											<th style="WIDTH: 15%;">Color</th>
+										</tr>
+									</thead>
+									<tbody class="abc_list">
+											  
                              			 <c:forEach items="${comStat}" var="vo">
                              		 		<tr>
 												<td style="WIDTH: 15%;">${vo.pick}</td>
@@ -254,12 +265,56 @@
 												<td style="WIDTH: 15%;">${vo.color}</td>
 											</tr>
                                 	 </c:forEach>           
+                           		  
+										
 									</tbody>
 									</table>
-                           		</div> 
-                         		</c:if>
+                             	</div> 
+                            	</c:if>
+								
 							</div>                         
-                                 <!-- <div class="clearfix"></div>
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                       
+                           
+                           <div id="companyTab" class="tab-pane fade">
+                              <table class="tg">
+											<tr>
+												<th class="tg-yw4l">Company Name</th>
+												<th class="tg-yw4l"></th>
+												<th class="tg-yw4l"></th>
+												<th class="tg-yw4l"></th>
+												<th class="tg-yw4l"></th>
+											</tr>
+											<tr>
+												<td class="tg-yw4l">Furniture Num</td>
+												<td class="tg-yw4l">Furniture Name</td>
+												<td class="tg-yw4l">Type</td>
+												<td class="tg-yw4l">Color</td>
+												<td class="tg-yw4l">Pick</td>
+											</tr>
+											<tr>
+												<td class="tg-yw4l">1</td>
+												<td class="tg-yw4l">365_Hollow_Bowl_hollow_Bowl</td>
+												<td class="tg-yw4l">Others</td>
+												<td class="tg-yw4l">White</td>
+												<td class="tg-yw4l">1</td>
+											</tr>
+
+										</table>
+										
+										
+                                 <div class="clearfix"></div>
                                  <div class="text-center" style="width: 280;">
                                     <button id="coLogin" name="coLogin"
                                        class="btn btn-primary" style="width: 120px;">LOGIN</button>
@@ -268,7 +323,7 @@
                                        SEARCH</a> <a href="/admin/user/pwdSearch"
                                        class="btn btn-primary">PWD SEARCH</a>
                                         <input type="hidden"name="action" value="login">
-                                 </div> -->
+                                 </div>
                               </li>
                               <!-- end content -->
                            </div>
@@ -298,7 +353,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4 col-sm-4 col-xs-12">
-						<a class="navbar-brand" href="#"><img
+						<a class="navbar-brand" href="index.html"><img
 							src="/admin/resources/images/logo.png" alt=""></a>
 					</div>
 					<!-- end col -->
@@ -331,43 +386,103 @@
 			<!-- end container -->
 		</div>
 		<!-- end section -->
+
 	</div>
 	<!-- end wrapper -->
 
 	<!-- Main Scripts-->
-   <script src="/admin/resources/js/jquery.js"></script>
+  <script src="/admin/resources/js/jquery.js"></script>
    <script src="/admin/resources/js/bootstrap.min.js"></script>
+   <!-- <script src="/admin/resources/js/plugins.js"></script> -->
    <script src="/admin/resources/js/hover.js"></script>
+   <!-- <script src="/admin/resources/js/threecolgallery.js"></script> -->
    <script src="/admin/resources/js/index.js"></script>
-   <script>
-		var preSelectedText = $('#ddd span').html();
-		function change() {
-			var SelectedText = $('#ddd span').html();
+   <!-- <script src="/admin/resources/js/jquery-3.2.1.js"></script> -->
+	<script>
+
+	var preSelectedText = $('#ddd span').html();
+	function change() {
+		
+		var SelectedText = $('#ddd span').html();
+		
+		if(preSelectedText != SelectedText) {
 			
-			if(preSelectedText != SelectedText) {
-				preSelectedText = SelectedText;
-				var stat = $('#ddd span').html();
-				$.ajax({
-					url: "/admin/stats/statistics",
-					type:"post",
-					data:{"stat":stat},
-					success:function(result){
-						$(".abc_list").empty();
+		 	/*  var stat = document.getElementById("selectStat").value;
+			alert(stat);  */
+			preSelectedText = SelectedText;
+			var stat = $('#ddd span').html();
+			$.ajax({
+				url: "/admin/stats/statistics",
+				type:"post",
+				data:{"stat":stat},
+				success:function(result){
+					$(".abc_list").empty();
+					
+					$(result).each(
+						function(index, item) {
+							var addRow = '<tr><td style="WIDTH: 15%;">'+item.pick+'</td>'
+								+'<td style="WIDTH: 17%;">'+item.furnitureNum+'</td>'
+								+'<td style="WIDTH: 30%;">'+item.furnitureName+'</td>'
+								+'<td style="WIDTH: 15%;">'+item.type+'</td>'
+								+'<td style="WIDTH: 15%;">'+item.color+'</td></tr>';
+			
+							$(".abc_list").append(addRow);
+					});
+					
 						
-						$(result).each(
-							function(index, item) {
-								var addRow = '<tr><td style="WIDTH: 15%;">'+item.pick+'</td>'
-									+'<td style="WIDTH: 17%;">'+item.furnitureNum+'</td>'
-									+'<td style="WIDTH: 30%;">'+item.furnitureName+'</td>'
-									+'<td style="WIDTH: 15%;">'+item.type+'</td>'
-									+'<td style="WIDTH: 15%;">'+item.color+'</td></tr>';
-				
-								$(".abc_list").append(addRow);
-						});
-					}
-				});
-			}
+				}
+			});
+			//
+			
 		}
+	}
+	
+	
+	
+	
+	
+/* 	$(function(){
+		function change(){
+			
+			 var select = $("#selectStat option:seleted").val();
+			alert(select);
+		}	
+		
+			 $.ajax({
+				url: "/admin/stats/statistics",
+				type:"post",
+				data:{"selectStat":$("#selectStat option:seleted").val()},
+				success:function(result){ 
+					
+				}
+			}); 
+		}
+		 */
+		
+		
+		
+		
+		
+	
+		/* $(function(){
+			$('#search').on('click',searchPwd);
+		});
+		
+		function searchPwd(){
+			var id = document.getElementById("id").value;
+			var email = document.getElementById("email").value;
+			var check =$("input[type='radio']:checked:checked");
+			 
+			// 체크박스 갯수만큼 for 문을 돌려 체크된 넘의 value값을 가져온다.
+			for(var i=0; i<check.length; i++){
+				if(check[i].value=="user"){
+					location.href="/admin/user/userPwd?id="+id+"&email="+email;
+				}
+				if(check[i].value=="company"){
+					location.href="/admin/user/companyPwd?coId="+id+"&coManagerEmail="+email;
+				}
+			}    
+		} */
 	</script>
 	
 </body>
