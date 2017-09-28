@@ -49,8 +49,8 @@ public class FileController {
 	// 이름/AdminPage/src/main/webapp/resources/file/
 	// C:/Users/(사용자 이름) /git/우리레포지터리
 	// 이름/AdminPage/src/main/webapp/resources/file/maps/
-	private String path = "C:/Users/SCITMASTER/git/DIY33/AdminPage/AdminPage/src/main/webapp/resources/file/";
-	private String path1 = "C:/Users/SCITMASTER/git/DIY33/AdminPage/AdminPage/src/main/webapp/resources/file/maps/";
+	private String path = "C:/Users/SCITMASTER/git/DIY33/AdminPage/src/main/webapp/resources/file/";
+	private String path1 = "C:/Users/SCITMASTER/git/DIY33/AdminPage/src/main/webapp/resources/file/maps/";
 	private Mail mail;
 
 	// 가구 라이브러리 업로드
@@ -64,8 +64,8 @@ public class FileController {
 	@RequestMapping(value = "fileSaved")
 	public String fileSaved(FurnitureVO vo, HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
-		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;// 다중파일
-																								// 업로드
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;// 다중 파일 업로드
+																								
 		List<MultipartFile> files = multipartRequest.getFiles("uploadFile");
 
 		String coNAME = (String) session.getAttribute("coName");
@@ -176,8 +176,8 @@ public class FileController {
 		BufferedImage image = null;
 		byte[] byteImg;
 		BASE64Decoder decoder = new BASE64Decoder();
-		byteImg = decoder.decodeBuffer(rstStrImg); // base64 디코더를 이용하여 byte 코드로
-													// 변환
+		byteImg = decoder.decodeBuffer(rstStrImg); // base64 디코더를 이용하여 byte 코드로 변환
+													
 		ByteArrayInputStream bis = new ByteArrayInputStream(byteImg);
 		image = ImageIO.read(bis); // BufferedImage형식으로 변환후 저장
 		bis.close();
@@ -185,7 +185,7 @@ public class FileController {
 		File folderObj = new File(imgData);
 		if (!folderObj.isDirectory())
 			folderObj.mkdir();
-		File outputFile = new File(fullpath); // 파일객체 생성
+		File outputFile = new File(fullpath); // 파일 객체 생성
 		if (outputFile.exists())
 			outputFile.delete();
 
@@ -198,55 +198,54 @@ public class FileController {
 		return "";
 	}
 
-
 	// 가구 작업창 표시용
-		@RequestMapping(value = "getFurnitureList", method = RequestMethod.POST)
-		@ResponseBody
-		public ArrayList<FurnitureVO> getFurnitureList(HttpSession session) {
+	@RequestMapping(value = "getFurnitureList", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<FurnitureVO> getFurnitureList(HttpSession session) {
 
-			return service.getFurnitureList();
-		}//
+		return service.getFurnitureList();
+	}//
 
-		@RequestMapping(value = "getTableList", method = RequestMethod.POST)
-		@ResponseBody
-		public ArrayList<FurnitureVO> getTableList(HttpSession session) {
+	@RequestMapping(value = "getTableList", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<FurnitureVO> getTableList(HttpSession session) {
 
-			return service.getTableList();
-		}//
+		return service.getTableList();
+	}//
 
-		@RequestMapping(value = "getChairList", method = RequestMethod.POST)
-		@ResponseBody
-		public ArrayList<FurnitureVO> getChairList(HttpSession session) {
+	@RequestMapping(value = "getChairList", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<FurnitureVO> getChairList(HttpSession session) {
 
-			return service.getChairList();
-		}//
+		return service.getChairList();
+	}//
 
-		@RequestMapping(value = "getSofaList", method = RequestMethod.POST)
-		@ResponseBody
-		public ArrayList<FurnitureVO> getSofaList(HttpSession session) {
+	@RequestMapping(value = "getSofaList", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<FurnitureVO> getSofaList(HttpSession session) {
 
-			return service.getSofaList();
-		}//
+		return service.getSofaList();
+	}//
 
-		@RequestMapping(value = "getBedList", method = RequestMethod.POST)
-		@ResponseBody
-		public ArrayList<FurnitureVO> getBedList(HttpSession session) {
+	@RequestMapping(value = "getBedList", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<FurnitureVO> getBedList(HttpSession session) {
 
-			return service.getBedList();
-		}//
+		return service.getBedList();
+	}//
 
-		@RequestMapping(value = "getClosetList", method = RequestMethod.POST)
-		@ResponseBody
-		public ArrayList<FurnitureVO> getClosetList(HttpSession session) {
+	@RequestMapping(value = "getClosetList", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<FurnitureVO> getClosetList(HttpSession session) {
 
-			return service.getClosetList();
-		}//
+		return service.getClosetList();
+	}//
 
-		@RequestMapping(value = "getOthersList", method = RequestMethod.POST)
-		@ResponseBody
-		public ArrayList<FurnitureVO> getOthersList(HttpSession session) {
+	@RequestMapping(value = "getOthersList", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<FurnitureVO> getOthersList(HttpSession session) {
 
-			return service.getOthersList();
-		}//
+		return service.getOthersList();
+	}//
 
 }

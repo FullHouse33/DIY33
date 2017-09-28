@@ -48,20 +48,18 @@ public class StatsServiceImplements implements StatsService{
 	}
 
 	//성별, 연령별 인기 제품 >> 희진이가 수정해주나? 쿄쿄
-	@Override
-	public void genFurnitureList(Model model, UserVO user) {
-	
-		ArrayList<RankVO> vo=dao.genFurnitureList(user);
-		ArrayList<RankVO> img = new ArrayList<>();
-		if (vo.size() != 0) {
-			for(int i=0;i<3;i++){
-				img.add(vo.get(i));
-			}
-			model.addAttribute("genList", img);
-		}
-		
-	}
-
+    @Override
+    public void genFurnitureList(Model model, UserVO user) {
+      ArrayList<RankVO> vo=dao.genFurnitureList(user);
+      ArrayList<RankVO> img = new ArrayList<>();
+      
+      if (vo.size() >3 ) {
+         for(int i=0;i<3;i++){
+            img.add(vo.get(i));
+         }
+         model.addAttribute("genList", img);
+      }
+    }
 	
 	@Override
 	public void Graph1(Model model) {

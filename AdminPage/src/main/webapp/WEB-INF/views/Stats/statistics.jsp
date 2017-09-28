@@ -18,7 +18,7 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- SITE META -->
-<title>HomeStyle | Responsive Furniture Website Template</title>
+<title>statistics</title>
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="keywords" content="">
@@ -188,19 +188,15 @@
 						</div>
 						<!-- end step 1 -->
 					
-				
-				
 				<div class="tab-style-1">
                      <div class="tabbed-widget">
                         <ul class="nav nav-tabs">
                            <li class="active"><a data-toggle="tab" href="#userTab"
                               aria-expanded="true">전체</a></li>
-                           <li class=""><a data-toggle="tab" href="#companyTab"
-                              aria-expanded="false">성별+연령</a></li>
+                           <!-- <li class=""><a data-toggle="tab" href="#companyTab"
+                              aria-expanded="false">성별+연령</a></li> -->
                         </ul>
                         
-                        
-						
                         <div class="tab-content">
                               <c:if test="${sessionScope.CoId==null}">  
                         
@@ -232,8 +228,6 @@
 										</tr>
 									</thead>
 									<tbody class="abc_list">
-								
-										
 									</tbody>
 								</table>
 								</div>
@@ -255,7 +249,6 @@
 										</tr>
 									</thead>
 									<tbody class="abc_list">
-											  
                              			 <c:forEach items="${comStat}" var="vo">
                              		 		<tr>
 												<td style="WIDTH: 15%;">${vo.pick}</td>
@@ -265,27 +258,11 @@
 												<td style="WIDTH: 15%;">${vo.color}</td>
 											</tr>
                                 	 </c:forEach>           
-                           		  
-										
 									</tbody>
 									</table>
                              	</div> 
                             	</c:if>
-								
 							</div>                         
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                       
                            
                            <div id="companyTab" class="tab-pane fade">
                               <table class="tg">
@@ -310,9 +287,7 @@
 												<td class="tg-yw4l">White</td>
 												<td class="tg-yw4l">1</td>
 											</tr>
-
 										</table>
-										
 										
                                  <div class="clearfix"></div>
                                  <div class="text-center" style="width: 280;">
@@ -353,7 +328,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4 col-sm-4 col-xs-12">
-						<a class="navbar-brand" href="index.html"><img
+						<a class="navbar-brand" href="#"><img
 							src="/admin/resources/images/logo.png" alt=""></a>
 					</div>
 					<!-- end col -->
@@ -386,7 +361,6 @@
 			<!-- end container -->
 		</div>
 		<!-- end section -->
-
 	</div>
 	<!-- end wrapper -->
 
@@ -428,18 +402,10 @@
 			
 							$(".abc_list").append(addRow);
 					});
-					
-						
 				}
 			});
-			//
-			
 		}
 	}
-	
-	
-	
-	
 	
 /* 	$(function(){
 		function change(){
@@ -458,11 +424,6 @@
 			}); 
 		}
 		 */
-		
-		
-		
-		
-		
 	
 		/* $(function(){
 			$('#search').on('click',searchPwd);

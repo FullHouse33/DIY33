@@ -2,7 +2,6 @@ package com.sesoc.test.controller;
 
 import java.util.Map;
 
-import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -95,10 +94,12 @@ public class UserController {
 	
 	//일반//
 	//회원 가입
-	@RequestMapping(value="division", method=RequestMethod.GET)
+	
+	/*@RequestMapping(value="division", method=RequestMethod.GET)
 	public String join(){
 		return "division";
-	}
+	}*/
+	
 	@RequestMapping(value="joinUserForm", method=RequestMethod.GET)
 	public String joinUserForm(){
 		return "/User/userJoinForm";
@@ -115,22 +116,21 @@ public class UserController {
 		return service.idCheck(vo);		
 	}
 	//로그인
-	@RequestMapping(value="loginUser", method = RequestMethod.GET)
-	public String loginUser(UserVO user, HttpSession session, Model model) {
-		System.out.println(user.toString());
-		UserVO result = service.loginUser(user);
-		System.out.println(result.toString());
-		if(result != null){
-			session.setAttribute("id", result.getId());
-			session.setAttribute("pwd", result.getPwd());
-			
-			sservice.genFurnitureList(model, result);//로그인한 특정 유저에 맞는 추천 제품
-		}
-		
-		sservice.bestFurnitureList(model);//유저에게 가장 인기 많은 제품
-		
-		return "home";
-	}
+   @RequestMapping(value="loginUser", method = RequestMethod.GET)
+   public String loginUser(UserVO user, HttpSession session, Model model) {
+      UserVO result = service.loginUser(user);
+
+      if(result != null){
+         session.setAttribute("id", result.getId());
+         session.setAttribute("pwd", result.getPwd());
+     
+         sservice.genFurnitureList(model, result);//로그인한 특정 유저에 맞는 추천 제품
+      }
+  
+      sservice.bestFurnitureList(model);//유저에게 가장 인기 많은 제품
+  
+      return "home";
+   	}
 	
 	/*@RequestMapping(value="connectedUser", method=RequestMethod.GET)
 	public String connectedUser(){
@@ -167,7 +167,7 @@ public class UserController {
 	@RequestMapping(value = "userUpdate")
 	public String userUpdate(UserVO user, Model model) {
 		model.addAttribute("user", service.modifyUser(user));
-		return "/User/userPageMenu";
+		return "home";
 	}
 	
 	//기업//
@@ -199,7 +199,7 @@ public class UserController {
 			session.setAttribute("coAuth", result.getCoAuthority());
 		}
 		
-		return "redirect:home";
+		return "redirect:/";
 	}
 	
 	/*@RequestMapping(value="connectedCompany", method=RequestMethod.GET)
@@ -232,7 +232,7 @@ public class UserController {
 	@RequestMapping(value = "companyUpdate")
 	public String companyUpdate(CompanyVO company, Model model) {
 		model.addAttribute("company", service.modifyCompany(company));
-		return "/Company/companyPageMenu";
+		return "home";
 	}
 
 	//공통//

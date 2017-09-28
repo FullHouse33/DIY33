@@ -52,22 +52,22 @@
 
 </head>
 <body>
-	<!-- PRELOADER -->
+   <!-- PRELOADER -->
         <div id="loader">
-			<div class="loader-container">
-				<img src="/admin/resources/images/load.gif" alt="" class="loader-site spinner">
-			</div>
-		</div>
-	<!-- END PRELOADER -->
+         <div class="loader-container">
+            <img src="/admin/resources/images/load.gif" alt="" class="loader-site spinner">
+         </div>
+      </div>
+   <!-- END PRELOADER -->
 
     <div id="wrapper">
         <header class="header affix-top">
             <div class="container-full">
                 <nav class="navbar navbar-inverse yamm"
-					style="padding-bottom: 5px; padding-top: 5px; box-shadow: 0 0 30px black; z-index: 50;">
-					<%@include file="navi.jsp"%>
-					<!--/.container-fluid -->
-				</nav>
+               style="padding-bottom: 5px; padding-top: 5px; box-shadow: 0 0 30px black; z-index: 50;">
+               <%@include file="navi.jsp"%>
+               <!--/.container-fluid -->
+            </nav>
             </div><!-- end container -->
         </header>
 
@@ -169,92 +169,67 @@
             </div><!-- END REVOLUTION SLIDER -->
         </div><!-- end first slider -->
 
-            		<c:if test="${sessionScope.id != null && sessionScope.id != 'admin'}">
-			                <c:if test="${genList != null}">
-			<section class="section">
-	            <div class="container">
-		                <div class="section-title text-center clearfix">
-		                    <h4>나에게 맞는 추천 가구 Top5</h4><hr>
-		                </div><!-- end title -->
-		                <div class="banner-masonry row">
-								<c:forEach items="${genList}" var="gen">
-				                    <div class="banner-item item-w1 item-h1">
-				                        <a href="#"><img src="/admin/resources/file/${gen.imgPath}" alt="" class="img-responsive"></a>
-				                        <!-- <div class="banner-button">
-				                        <a href="#" class="button button--aylen btn">GARDEN SUPPLIES</a>
-				                        </div> -->
-				                    </div><!-- end banner-item -->
-								</c:forEach>
-		                </div><!-- end banner -->
-	            </div><!-- end container -->
-	        </section><!-- end section -->
-			                </c:if>
-					</c:if>
-		
+                  <c:if test="${sessionScope.id != null && sessionScope.id != 'admin'}">
+                         <c:if test="${genList != null}">
+         <section class="section">
+               <div class="container">
+                      <div class="section-title text-center clearfix">
+                          <h4>나에게 맞는 추천 가구 Top3</h4><hr>
+                      </div><!-- end title -->
+                      <div class="banner-masonry row">
+                        <c:forEach items="${genList}" var="gen">
+                                <div class="banner-item item-w1 item-h1">
+                                    <a href="#"><img src="/admin/resources/file/${gen.imgPath}"  style="width: 260px; height: 265px;" alt="" class="img-responsive"></a>
+                                    <!-- <div class="banner-button">
+                                    <a href="#" class="button button--aylen btn">GARDEN SUPPLIES</a>
+                                    </div> -->
+                                </div><!-- end banner-item -->
+                        </c:forEach>
+                      </div><!-- end banner -->
+               </div><!-- end container -->
+           </section><!-- end section -->
+                         </c:if>
+               </c:if>
+      
         <section class="section">
             <div class="container">
                 <div class="section-title text-center clearfix">
                     <h4>유저들에게 가장 인기가 좋은 가구 Top9</h4>
                     <hr>
                 </div><!-- end title -->
-                <div class="banner-masonry row">
+                
+                  <c:if test="${rank != null}">
+                  <c:forEach items="${rank}" var="ranks">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="shop-item text-center">
+                            <div class="shop-thumbnail">
+                                <img src="/admin/resources/file/${ranks.imgPath}" alt="" class="img-responsive"   style="width: 260px; height: 265px;">
+                            </div><!-- end shop-thumbnail -->
+                            <div class="shop-desc">
+                                <h3><a href="#" title="">Berlingo Armchair</a></h3>
+                            </div><!-- end shop-desc -->
+                        </div><!-- end shop-item -->
+                    </div><!-- end col -->
+                              </c:forEach>
+                </c:if>
+                
+               <%--  <div class="banner-masonry row">
                 <c:if test="${rank != null}">
-					<c:forEach items="${rank}" var="ranks">
-	                    <div class="banner-item item-w1 item-h1">
-	                        <a href="#"><img src="/admin/resources/file/${ranks.imgPath}" alt="" class="img-responsive"></a>
-	                        <!-- <div class="banner-button">
-	                        <a href="#" class="button button--aylen btn">GARDEN SUPPLIES</a>
-	                        </div> -->
-	                    </div><!-- end banner-item -->
-					</c:forEach>
+               <c:forEach items="${rank}" var="ranks">
+                       <div class="banner-item item-w1 item-h1">
+                           <a href="#"><img src="/admin/resources/file/${ranks.imgPath}" alt="" class="img-responsive"></a>
+                           <!-- <div class="banner-button">
+                           <a href="#" class="button button--aylen btn">GARDEN SUPPLIES</a>
+                           </div> -->
+                       </div><!-- end banner-item -->
+               </c:forEach>
                 </c:if>
 
-                </div><!-- end banner -->
-                <div class="row">
-                    <div class="col-sm-15 col-xs-15">
-                        <div class="cat-boxes">
-                            <a href="#" title="">
-                                <img src="/admin/resources/upload/icon_01.png" alt="" class="img-responsive">
-                                <h4>Sofa Collection</h4>
-                            </a>
-                        </div><!-- end cat-boxes -->
-                    </div><!-- end col -->
-                    <div class="col-sm-15 col-xs-15">
-                        <div class="cat-boxes">
-                            <a href="#" title="">
-                                <img src="/admin/resources/upload/icon_02.png" alt="" class="img-responsive">
-                                <h4>Chair Styles</h4>
-                            </a>
-                        </div><!-- end cat-boxes -->
-                    </div><!-- end col -->
-                    <div class="col-sm-15 col-xs-15">
-                        <div class="cat-boxes">
-                            <a href="#" title="">
-                                <img src="/admin/resources/upload/icon_03.png" alt="" class="img-responsive">
-                                <h4>Closet</h4>
-                            </a>
-                        </div><!-- end cat-boxes -->
-                    </div><!-- end col -->
-                    <div class="col-sm-15 col-xs-15">
-                        <div class="cat-boxes">
-                            <a href="#" title="">
-                                <img src="/admin/resources/upload/icon_04.png" alt="" class="img-responsive">
-                                <h4>Desk Edition</h4>
-                            </a>
-                        </div><!-- end cat-boxes -->
-                    </div><!-- end col -->
-                    <div class="col-sm-15 col-xs-15">
-                        <div class="cat-boxes">
-                            <a href="#" title="">
-                                <img src="/admin/resources/upload/icon_05.png" alt="" class="img-responsive">
-                                <h4>Decoration</h4>
-                            </a>
-                        </div><!-- end cat-boxes -->
-                    </div><!-- end col -->
-                </div><!-- end row -->
+                </div><!-- end banner --> --%>
+              
             </div><!-- end container -->
         </section><!-- end section -->
-		
+      
         <section class="section lb nopadbot">
             <div class="container-fluid">
                 <div class="section-title text-center clearfix">
@@ -262,19 +237,6 @@
                     <p>Listed below our awesome products with a stylish portfolio section!</p>
                     <hr>
                 </div><!-- end title -->
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <nav class="portfolio-filter text-center">
-                            <ul class="list-inline">
-                                <li><a class="button button--aylen btn" href="#" data-filter="*">All</a></li>
-                                <li><a class="button button--aylen btn" href="#" data-filter=".cat1">Furniture Sets</a></li> 
-                                <li><a class="button button--aylen btn" href="#" data-filter=".cat2">Pillows</a></li>
-                                <li><a class="button button--aylen btn" href="#" data-filter=".cat3">Combinations</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
 
                 <div id="da-thumbs" class="da-thumbs">
                     <div class="pentry item-w1 item-h1 cat3">
@@ -345,63 +307,14 @@
                 </div><!-- end title -->
 
                 <div class="row">
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="shop-item text-center">
                             <div class="shop-thumbnail">
-                                <img src="/admin/resources/upload/shop_01.jpg" alt="" class="img-responsive">
+                                <img src="/admin/resources/upload/shop_04.jpg" alt="" class="img-responsive">
                             </div><!-- end shop-thumbnail -->
                             <div class="shop-desc">
-                                <h3><a href="#" title="">Pink Lamp</a></h3>
-                                <small class="regular">$90.00</small>
+                                <h3><a href="#" title="">Berlingo Armchair</a></h3>
                             </div><!-- end shop-desc -->
-
-                            <div class="shop-meta clearfix">
-                                <ul class="">
-                                    <li><a href="#"><i class="fa fa-search"></i> Details</a></li>
-                                    <li><a href="#"><i class="fa fa-heart-o"></i> Wishlist</a></li>
-                                    <li><a href="#"><i class="fa fa-eye"></i> Compare</a></li>
-                                </ul><!-- end list -->
-                            </div><!-- end shop-meta --> 
-                        </div><!-- end shop-item -->
-                    </div><!-- end col -->
-
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="shop-item text-center">
-                            <div class="shop-thumbnail">
-                                <img src="/admin/resources/upload/shop_02.jpg" alt="" class="img-responsive">
-                            </div><!-- end shop-thumbnail -->
-                            <div class="shop-desc">
-                                <h3><a href="#" title="">Oldschool Armchair</a></h3>
-                                <small class="regular">$1233.00</small>
-                            </div><!-- end shop-desc -->
-
-                            <div class="shop-meta clearfix">
-                                <ul class="">
-                                    <li><a href="#"><i class="fa fa-search"></i> Details</a></li>
-                                    <li><a href="#"><i class="fa fa-heart-o"></i> Wishlist</a></li>
-                                    <li><a href="#"><i class="fa fa-eye"></i> Compare</a></li>
-                                </ul><!-- end list -->
-                            </div><!-- end shop-meta --> 
-                        </div><!-- end shop-item -->
-                    </div><!-- end col -->
-
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="shop-item text-center">
-                            <div class="shop-thumbnail">
-                                <img src="/admin/resources/upload/shop_03.jpg" alt="" class="img-responsive">
-                            </div><!-- end shop-thumbnail -->
-                            <div class="shop-desc">
-                                <h3><a href="#" title="">Classic Gramophone</a></h3>
-                                <small class="regular">$553.00</small>
-                            </div><!-- end shop-desc -->
-
-                            <div class="shop-meta clearfix">
-                                <ul class="">
-                                    <li><a href="#"><i class="fa fa-search"></i> Details</a></li>
-                                    <li><a href="#"><i class="fa fa-heart-o"></i> Wishlist</a></li>
-                                    <li><a href="#"><i class="fa fa-eye"></i> Compare</a></li>
-                                </ul><!-- end list -->
-                            </div><!-- end shop-meta --> 
                         </div><!-- end shop-item -->
                     </div><!-- end col -->
 
@@ -412,286 +325,34 @@
                             </div><!-- end shop-thumbnail -->
                             <div class="shop-desc">
                                 <h3><a href="#" title="">Berlingo Armchair</a></h3>
-                                <small class="regular">$600.00</small>
                             </div><!-- end shop-desc -->
+                        </div><!-- end shop-item -->
+                    </div><!-- end col -->
 
-                            <div class="shop-meta clearfix">
-                                <ul class="">
-                                    <li><a href="#"><i class="fa fa-search"></i> Details</a></li>
-                                    <li><a href="#"><i class="fa fa-heart-o"></i> Wishlist</a></li>
-                                    <li><a href="#"><i class="fa fa-eye"></i> Compare</a></li>
-                                </ul><!-- end list -->
-                            </div><!-- end shop-meta --> 
+                     <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="shop-item text-center">
+                            <div class="shop-thumbnail">
+                                <img src="/admin/resources/upload/shop_04.jpg" alt="" class="img-responsive">
+                            </div><!-- end shop-thumbnail -->
+                            <div class="shop-desc">
+                                <h3><a href="#" title="">Berlingo Armchair</a></h3>
+                            </div><!-- end shop-desc -->
+                        </div><!-- end shop-item -->
+                    </div><!-- end col -->
+                    
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="shop-item text-center">
+                            <div class="shop-thumbnail">
+                                <img src="/admin/resources/upload/shop_04.jpg" alt="" class="img-responsive">
+                            </div><!-- end shop-thumbnail -->
+                            <div class="shop-desc">
+                                <h3><a href="#" title="">Berlingo Armchair</a></h3>
+                            </div><!-- end shop-desc -->
                         </div><!-- end shop-item -->
                     </div><!-- end col -->
                 </div><!-- end row -->
             </div><!-- end container -->
         </section><!-- end section -->
-
-        <section class="section lb">
-            <div class="container">
-                <div class="section-title text-center clearfix">
-                    <h4>우리 사이트를 사용한 유저의 리뷰</h4>
-                    <p>Don't forget to check recent home decoration trends from our blog!</p>
-                    <hr>
-                </div><!-- end title -->
-
-                <div class="blog-list row">
-                    <div class="blog-wrapper col-md-4 col-sm-6">
-
-                        <div class="blog-media">
-                            <img src="/admin/resources/upload/blog_01.jpg" alt="" class="img-responsive">
-                        </div><!-- end media -->
-
-                        <div class="blog-desc">
-                            <span class="post-date">May 13, 2016</span>
-                            <h3><a href="#" title="">Our New Workspace</a></h3>
-                            <div class="post-meta">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fa fa-comment"></i> 04 Comments</a></li>
-                                    <li><a href="#"><i class="fa fa-tag"></i> Furniture</a></li>
-                                    <li><a href="#"><i class="fa fa-eye"></i>44 Views</a></li>
-                                </ul><!-- end ul -->
-                            </div><!-- end meta -->
-
-                            <p>Feel alive! So if you’re looking for, here is a list of some of the most popular and fiestas the Mardin has to offer thisfiestas the Mardin has to offer!</p>
-                        </div><!-- end desc -->
-
-                        <div class="blog-bottom clearfix">
-                            <a href="#" class="button button--aylen btn">Read More</a>
-                        </div><!-- end blog-bottom -->
-                    </div><!-- end blog-wrapper -->
-
-                    <div class="blog-wrapper col-md-4 col-sm-6">
-                        <div class="blog-media">
-                            <div id="myCarousel1" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="item active">
-                                        <img src="/admin/resources/upload/blog_03.jpg" alt="" class="img-responsive">
-                                    </div>
-                                    <div class="item">
-                                        <img src="/admin/resources/upload/blog_04.jpg" alt="" class="img-responsive">
-                                    </div>
-                                </div>
-                                <a class="left carousel-control" href="#" role="button" data-slide="prev">
-                                    <span class="fa fa-angle-left" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="right carousel-control" href="#" role="button" data-slide="next">
-                                    <span class="fa fa-angle-right" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                        </div><!-- end media -->
-
-                        <div class="blog-desc">
-                            <span class="post-date">May 17, 2016</span>
-                            <h3><a href="#" title="">Boby Markinson Collection</a></h3>
-                            <div class="post-meta">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fa fa-comment"></i> 02 Comments</a></li>
-                                    <li><a href="#"><i class="fa fa-tag"></i> Collection</a></li>
-                                    <li><a href="#"><i class="fa fa-eye"></i>41 Views</a></li>
-                                </ul><!-- end ul -->
-                            </div><!-- end meta -->
-
-                            <p>Here is a list of some of the most popular festivals and fiestas th has to offer thisfiestas the Mardin has to offer! Feel alive! So if you’re looking for, </p>
-                        </div><!-- end desc -->
-
-                        <div class="blog-bottom clearfix">
-                            <a href="#" class="button button--aylen btn">Read More</a>
-                        </div><!-- end blog-bottom -->
-                    </div><!-- end blog-wrapper -->
-
-                    <div class="blog-wrapper col-md-4 col-sm-6">
-                        <div class="blog-media">
-                            <img src="/admin/resources/upload/blog_02.jpg" alt="" class="img-responsive">
-                        </div><!-- end media -->
-
-                        <div class="blog-desc">
-                            <span class="post-date">May 12, 2016</span>
-                            <h3><a href="#" title="">A woman thinking</a></h3>
-                            <div class="post-meta">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fa fa-comment"></i> 41 Comments</a></li>
-                                    <li><a href="#"><i class="fa fa-tag"></i> Design</a></li>
-                                    <li><a href="#"><i class="fa fa-eye"></i>561 Views</a></li>
-                                </ul><!-- end ul -->
-                            </div><!-- end meta -->
-
-                            <p>Mardin has to offer! Feel alive! So if you’re for, here is a list of some of the most popular festivals and fiestas the Mardin has to offer thisfiestas the.</p>
-                        </div><!-- end desc -->
-
-                        <div class="blog-bottom clearfix">
-                            <a href="#" class="button button--aylen btn">Read More</a>
-                        </div><!-- end blog-bottom -->
-                    </div><!-- end blog-wrapper -->
-                </div><!-- end blog-list -->
-            </div><!-- end container -->
-        </section><!-- end section -->
-
-        <section class="section">
-            <div class="container">
-                <div class="section-title text-center clearfix">
-                    <h4>우리 스폰서들???</h4>
-                    <p>Special thanks for all our suppliers to build awesome community!</p>
-                    <hr>
-                </div><!-- end title -->
-
-                <div id="owl-client" class="clients">
-                    <div class="client-logo GrayScale">
-                        <a href="#"><img src="/admin/resources/upload/client_01.png" alt="" class="img-responsive"></a>
-                    </div><!-- end logo -->
-
-                    <div class="client-logo GrayScale">
-                        <a href="#"><img src="/admin/resources/upload/client_02.png" alt="" class="img-responsive"></a>
-                    </div><!-- end logo -->
-
-                    <div class="client-logo GrayScale">
-                        <a href="#"><img src="/admin/resources/upload/client_03.png" alt="" class="img-responsive"></a>
-                    </div><!-- end logo -->
-
-                    <div class="client-logo GrayScale">
-                        <a href="#"><img src="/admin/resources/upload/client_04.png" alt="" class="img-responsive"></a>
-                    </div><!-- end logo -->
-
-                    <div class="client-logo GrayScale">
-                        <a href="#"><img src="/admin/resources/upload/client_05.png" alt="" class="img-responsive"></a>
-                    </div><!-- end logo -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </section><!-- end section -->
-
-        <footer class="section footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-12">
-                        <div class="widget clearfix">
-                            <div class="widget-title">
-                                <h4>Business Links</h4>
-                                <hr>
-                            </div>
-
-                            <div class="link-widget">
-                                <ul class="check">
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">About us</a></li>
-                                    <li><a href="#">Get In Touch</a></li>
-                                    <li><a href="#">Refund & Exchange</a></li>
-                                    <li><a href="#">Support</a></li>
-                                </ul>
-                            </div><!-- end link -->
-                        </div><!-- end widget -->
-
-                        <div class="widget clearfix">
-                            <div class="widget-title">
-                                <h4>Copyrights</h4>
-                                <hr>
-                            </div>
-
-                            <div class="link-widget">
-                                <ul class="check">
-                                    <li><a href="#">Terms of Usage</a></li>
-                                    <li><a href="#">Trademarks</a></li>
-                                    <li><a href="#">Make a Deposite</a></li>
-                                </ul>
-                            </div><!-- end link -->
-                        </div><!-- end widget -->
-                    </div><!-- end col -->
-
-                    <div class="col-md-6 col-sm-12">
-                        <div class="widget clearfix">
-                            <div class="widget-title">
-                                <h4>All Categories</h4>
-                                <hr>
-                            </div>
-
-                            <div class="link-widget">
-                                <div class="row">
-                                    <div class="col-md-4 col-sm-12">
-                                        <ul class="check">
-                                            <li><a href="#">Hand tools</a></li>
-                                            <li><a href="#">Construction market</a></li>
-                                            <li><a href="#">Chandelier</a></li>
-                                            <li><a href="#">Garden Furniture</a></li>
-                                            <li><a href="#">Coffee table</a></li>
-                                            <li><a href="#">TV unit</a></li>
-                                            <li><a href="#">Cloakroom</a></li>
-                                            <li><a href="#">Single Seat</a></li>
-                                            <li><a href="#">Office Chairs</a></li>
-                                            <li><a href="#">Coffee Table</a></li>
-                                            <li><a href="#">Bookshelf</a></li>
-                                        </ul>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-4 col-sm-12">
-                                        <ul class="check">
-                                            <li><a href="#">Drill</a></li>
-                                            <li><a href="#">Pique Sets</a></li>
-                                            <li><a href="#">Sleep set</a></li>
-                                            <li><a href="#">Hardware</a></li>
-                                            <li><a href="#">Air conditioning</a></li>
-                                            <li><a href="#">Jalousie</a></li>
-                                            <li><a href="#">Sled</a></li>
-                                            <li><a href="#">Anchor Machine</a></li>
-                                            <li><a href="#">The Lawn Mower</a></li>
-                                            <li><a href="#">Submersible Pump</a></li>
-                                            <li><a href="#">Wall paper</a></li>
-                                        </ul>
-                                    </div><!-- end col -->
-
-                                    <div class="col-md-4 col-sm-12">
-                                        <ul class="check">
-                                            <li><a href="#">Coat Stand</a></li>
-                                            <li><a href="#">Shoe cabinet</a></li>
-                                            <li><a href="#">Bathroom Cabinet</a></li>
-                                            <li><a href="#">Study desk</a></li>
-                                            <li><a href="#">Home textiles</a></li>
-                                            <li><a href="#">Wardrobe</a></li>
-                                            <li><a href="#">Young room</a></li>
-                                            <li><a href="#">Canvas</a></li>
-                                            <li><a href="#">Bed</a></li>
-                                        </ul>
-                                    </div><!-- end col -->
-                                </div><!-- end row -->
-                            </div><!-- end link -->
-                        </div><!-- end widget -->
-                    </div><!-- end col -->
-
-                    <div class="col-md-3 col-sm-12">
-                        <div class="widget clearfix">
-                            <div class="widget-title">
-                                <h4>Email Newsletter</h4>
-                                <hr>
-                            </div>
-
-                            <div class="newsletter-widget">
-                                <p>Subscribe our newsletter for discount and coupon codes.</p>
-                                <form>
-                                    <input type="text" class="form-control input-lg" placeholder="Your name" />
-                                    <input type="email" class="form-control input-lg" placeholder="Email" />
-                                    <button class="button button--aylen btn">Subscribe Now</button>
-                                </form>
-                            </div><!-- end newsletter -->
-
-                        </div><!-- end widget -->
-
-                        <div class="widget clearfix">
-                            <div class="row stat-wrapper">
-                                <div class="stats col-md-6">
-                                    <h5>Products</h5>
-                                    <p>122.500</p>
-                                </div><!-- end stats -->
-                                <div class="stats col-md-6">
-                                    <h5>Customers</h5>
-                                    <p>78.200</p>
-                                </div><!-- end stats -->
-                            </div><!-- end row -->
-                        </div><!-- end widget -->
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </footer>
 
         <div class="topfooter">
             <div class="container">
